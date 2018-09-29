@@ -10,6 +10,7 @@ import Header from '../components/Header';
 import Background from '../components/Background';
 import Card from '../components/Card';
 import Title from '../components/Title';
+import { WIDTH } from '../constants';
 
 const styles = StyleSheet.create({
   buttons: {
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   card: {
-    width: Dimensions.get('window').width - 40,
+    width: WIDTH - 40,
     margin: 20,
   },
 });
@@ -40,18 +41,12 @@ class Register extends React.Component {
     const { props } = this;
     return (
       <Background>
-        <KeyboardAvoidingView
-          behavior="position"
-          contentContainerStyle={styles.contentContainer}
-          style={styles.container}
-        >
+        <KeyboardAvoidingView behavior="position">
           <Header prefix="Customize your" title="Profile" />
           <View style={styles.buttons}>
             <Button title="BACK" onPress={() => props.navigation.pop()} style={styles.backButton} />
             <Button
               title="NEXT"
-              style={styles.registerButton}
-              textStyle={styles.registerText}
               onPress={() => {
                 const [displayName, email, password] = ['displayName', 'email', 'password'].map(
                   key => this.state[key].trim(),

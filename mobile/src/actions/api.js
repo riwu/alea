@@ -4,8 +4,7 @@ import env from '../../env';
 axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/' : env.SERVER_URL;
 
 const [get, post, patch] = ['get', 'post', 'patch'].map(method => (path, data) => {
-  const { audio, ...rest } = data || {};
-  console.log('request', method, path, rest);
+  console.log('request', method, path, data);
   return axios({
     method,
     url: path,
