@@ -13,7 +13,7 @@ const config = {
 
 const store = createStore(
   persistReducer(config, reducer),
-  composeWithDevTools()(applyMiddleware(...middleware)),
+  composeWithDevTools({})(applyMiddleware(...middleware)),
 );
 
 export default store;
