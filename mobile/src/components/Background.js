@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
   },
   children: {
     position: 'absolute',
+    height: '100%',
   },
 });
 

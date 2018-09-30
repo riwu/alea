@@ -68,6 +68,7 @@ class SubmitHack extends React.Component {
           style={styles.input}
           placeholder="Enter your hack"
           onChangeText={text => this.setState({ text })}
+          blurOnSubmit
         />
       </PageWithCard>
     );

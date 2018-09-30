@@ -1,11 +1,15 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, KeyboardAvoidingView } from 'react-native';
+import { Header } from 'react-navigation';
 import Button from './Button';
-import Header from './Header';
+import HeaderComponent from './Header';
 import Background from './Background';
 import RightHeader from './RightHeader';
 
 const styles = StyleSheet.create({
+  container: {
+    height: '100%',
+  },
   headerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -25,20 +29,26 @@ const styles = StyleSheet.create({
 
 const Page = props => (
   <Background>
-    <View style={styles.headerContainer}>
-      <View>
-        <Header prefix={props.prefix} title={props.title} />
-        <View style={styles.buttons}>
-          {props.backAction && (
-            <Button title="BACK" onPress={props.backAction} style={styles.backButton} />
-          )}
-          <Button {...props.button} />
+    <KeyboardAvoidingView
+      behavior="position"
+      keyboardVerticalOffset={Header.HEIGHT}
+      contentContainerStyle={styles.container}
+    >
+      <View style={styles.headerContainer}>
+        <View>
+          <HeaderComponent prefix={props.prefix} title={props.title} />
+          <View style={styles.buttons}>
+            {props.backAction && (
+              <Button title="BACK" onPress={props.backAction} style={styles.backButton} />
+            )}
+            <Button {...props.button} />
+          </View>
         </View>
+        {props.rightHeader && <RightHeader {...props.rightHeader} />}
       </View>
-      {props.rightHeader && <RightHeader {...props.rightHeader} />}
-    </View>
 
-    {props.children}
+      {props.children}
+    </KeyboardAvoidingView>
   </Background>
 );
 

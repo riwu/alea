@@ -8,7 +8,7 @@ const hacks = (state = {}, action) => {
       return {
         ...state,
         ...action.categories.reduce((acc, category) => {
-          acc[category] = (state[category] || []).concat(action.text);
+          acc[category] = [action.text].concat(state[category] || []);
           return acc;
         }, {}),
       };
