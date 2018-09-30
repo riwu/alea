@@ -32,7 +32,7 @@ const Page = props => (
           {props.backAction && (
             <Button title="BACK" onPress={props.backAction} style={styles.backButton} />
           )}
-          <Button title={props.button.title} onPress={props.button.onPress} />
+          <Button {...props.button} />
         </View>
       </View>
       {props.rightHeader && <RightHeader {...props.rightHeader} />}

@@ -13,6 +13,7 @@ app.use(require('./middleware/authentication'));
 
 app.use('/users', require('./routes/users'));
 app.use('/sessions', require('./routes/sessions'));
+app.use('/hacks', require('./routes/hacks'));
 
 app.use(require('./middleware/errorHandler'));
 
