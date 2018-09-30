@@ -11,6 +11,7 @@ import Background from '../components/Background';
 import Card from '../components/Card';
 import RightHeader from '../components/RightHeader';
 import data from './data';
+import Adaptabilities from '../components/Adaptabilities';
 import { WIDTH } from '../constants';
 
 const styles = StyleSheet.create({
@@ -38,22 +39,11 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginTop: 5,
   },
-
-  adaptabilities: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  unselected: {
-    backgroundColor: 'white',
-  },
-  buttonText: {
-    color: 'white',
-  },
 });
 
 class Profile extends React.Component {
   state = {
-    selected: null,
+    selected: Object.entries(data)[0][1].title,
   };
 
   render() {
@@ -106,18 +96,10 @@ class Profile extends React.Component {
           ))}
         </View>
 
-        <View style={styles.adaptabilities}>
-          {Object.entries(data).map(([id, { Icon, title }]) => (
-            <Button
-              key={id}
-              style={this.state.selected !== title && styles.unselected}
-              onPress={() => this.setState({ selected: title })}
-            >
-              <Icon fill={this.state.selected === title ? 'white' : '#86BC25'} />
-              {this.state.selected === title && <Text style={styles.buttonText}>{title}</Text>}
-            </Button>
-          ))}
-        </View>
+        <Adaptabilities
+          onPress={title => this.setState({ selected: title })}
+          selected={this.state.selected}
+        />
 
         <Button title="SUBMIT A HACK" onPress={() => props.navigation.navigate('SubmitHack')} />
       </Background>
