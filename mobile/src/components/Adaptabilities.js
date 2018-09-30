@@ -25,11 +25,11 @@ const Adaptabilities = props => (
     {Object.entries(data).map(([id, { Icon, title }]) => (
       <Button
         key={id}
-        style={[styles.button, props.selected !== title && styles.unselected]}
+        style={[styles.button, !props.isSelected(title) && styles.unselected]}
         onPress={() => props.onPress(title)}
       >
-        <Icon fill={props.selected === title ? 'white' : '#86BC25'} />
-        {props.selected === title && <Text style={styles.buttonText}>{title}</Text>}
+        <Icon fill={props.isSelected(title) ? 'white' : '#86BC25'} />
+        {props.isSelected(title) && <Text style={styles.buttonText}>{title}</Text>}
       </Button>
     ))}
   </View>
