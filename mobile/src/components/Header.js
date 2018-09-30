@@ -4,6 +4,7 @@ import { StyleSheet, View, Text } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     paddingLeft: 20,
+    paddingTop: 20,
   },
   prefix: {
     color: 'white',

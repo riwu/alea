@@ -29,7 +29,9 @@ const Page = props => (
       <View>
         <Header prefix={props.prefix} title={props.title} />
         <View style={styles.buttons}>
-          <Button title="BACK" onPress={() => props.navigation.pop()} style={styles.backButton} />
+          {props.backAction && (
+            <Button title="BACK" onPress={props.backAction} style={styles.backButton} />
+          )}
           <Button title={props.button.title} onPress={props.button.onPress} />
         </View>
       </View>

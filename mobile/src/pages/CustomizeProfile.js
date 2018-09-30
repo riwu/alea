@@ -13,8 +13,8 @@ import PageWithCard from '../components/PageWithCard';
 const dataArr = Object.entries(data);
 
 const styles = StyleSheet.create({
-  trailContainer: {
-    width: WIDTH / 2 - 50,
+  traitContainer: {
+    width: WIDTH / 2 - 55,
     height: WIDTH / 2 - 80,
     margin: 5,
     padding: 10,
@@ -47,6 +47,11 @@ class CustomizeProfile extends React.Component {
       <PageWithCard
         prefix="Customize your"
         title="Profile"
+        backAction={
+          this.state.index === 0
+            ? null
+            : () => this.setState(prevState => ({ index: prevState.index - 1 }))
+        }
         button={{
           title: 'NEXT',
           onPress: () => {
@@ -73,7 +78,7 @@ class CustomizeProfile extends React.Component {
                 }))
                 }
               >
-                <Component style={styles.trailContainer}>
+                <Component style={styles.traitContainer}>
                   <Text style={styles.traitTextStyle}>{trait}</Text>
                 </Component>
               </TouchableOpacity>
