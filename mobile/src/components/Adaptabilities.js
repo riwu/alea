@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
   button: {
-    width: '35%',
+    width: '30%',
     flexDirection: 'column',
     paddingHorizontal: 10,
   },

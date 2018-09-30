@@ -83,6 +83,7 @@ const Home = props => (
           title="LOG IN"
           style={[styles.button, styles.loginButton]}
           textStyle={styles.loginText}
+          onPress={() => props.navigation.navigate('Login')}
         />
         <Button
           title="SIGN UP"
