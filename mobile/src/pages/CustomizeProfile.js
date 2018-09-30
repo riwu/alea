@@ -16,7 +16,6 @@ const dataArr = Object.entries(data);
 const styles = StyleSheet.create({
   traitContainer: {
     width: WIDTH / 2 - 55,
-    height: WIDTH / 2 - 80,
     margin: 5,
     padding: 10,
 
@@ -24,6 +23,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'lightgray',
     overflow: 'hidden',
+
+    flexGrow: 1,
   },
   traitTextStyle: {
     fontSize: 16,
@@ -87,7 +88,6 @@ class CustomizeProfile extends React.Component {
             const Component = this.state.selected[id] ? LinearGradientView : View;
             return (
               <TouchableOpacity
-                key={id}
                 onPress={() => this.setState(prevState => ({
                   selected: { ...prevState.selected, [id]: !prevState.selected[id] },
                 }))

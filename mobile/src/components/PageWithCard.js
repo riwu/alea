@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     width: WIDTH - 40,
     margin: 20,
     padding: 25,
+    flex: 1,
   },
 });
 

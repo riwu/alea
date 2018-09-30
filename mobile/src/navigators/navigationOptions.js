@@ -17,6 +17,9 @@ export default {
     headerStyle: {
       backgroundColor: 'black',
     },
+    headerTitleContainerStyle: {
+      marginHorizontal: 20,
+    },
     headerBackImage: <MaterialCommunityIcons name="arrow-left" style={styles.backIcon} />,
   },
 };

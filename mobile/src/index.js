@@ -47,12 +47,19 @@ const checkForUpdates = async () => {
   );
 };
 
+const init = () => {
+  checkForUpdates();
+  store.dispatch(getHacks());
+};
+
+if (Platform.OS === 'ios') {
+  init(); // AppState change event not called for initial load on iOS
+}
+
 AppState.addEventListener('change', async (newState) => {
   console.log('new state', newState);
   if (newState === 'active') {
-    // will be called even if fresh start
-    checkForUpdates();
-    store.dispatch(getHacks());
+    init();
   }
 });
 

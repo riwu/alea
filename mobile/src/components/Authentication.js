@@ -15,6 +15,7 @@ class Authentication extends React.Component {
     const { props } = this;
     return (
       <PageWithCard
+        keyboardAvoidingView
         prefix={props.prefix}
         title={props.title}
         button={{
@@ -50,6 +51,7 @@ class Authentication extends React.Component {
             maxLength={20}
             autoCorrect={false}
             placeholder="Name"
+            textContentType="name"
           />
         )}
         <TextInput
@@ -58,12 +60,15 @@ class Authentication extends React.Component {
           autoCapitalize="none"
           maxLength={30}
           placeholder="Email"
+          textContentType="emailAddress"
+          keyboardType="email-address"
         />
         <TextInput
           onChangeText={password => this.setState({ password })}
           secureTextEntry
           autoCapitalize="none"
           placeholder="Password"
+          textContentType="password"
         />
       </PageWithCard>
     );

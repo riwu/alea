@@ -20,7 +20,8 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "riwu.alea"
+      "bundleIdentifier": "riwu.alea",
+      "buildNumber": "2"
     },
     "android": {
       "package": "riwu.alea"

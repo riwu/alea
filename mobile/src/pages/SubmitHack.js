@@ -31,6 +31,7 @@ class SubmitHack extends React.Component {
     const selected = Object.entries(this.state.selected).filter(([, isSelected]) => isSelected);
     return (
       <PageWithCard
+        keyboardAvoidingView
         prefix="Submit your"
         title="Hack"
         button={{
