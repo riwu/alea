@@ -3,7 +3,7 @@ import env from '../../env';
 
 axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? 'http://192.168.1.105:3000/' : env.SERVER_URL;
 
-const [get, post, patch] = ['get', 'post', 'patch'].map(method => (path, data) => {
+const [get, post] = ['get', 'post'].map(method => (path, data) => {
   console.log('request', method, path, data);
   return axios({
     method,

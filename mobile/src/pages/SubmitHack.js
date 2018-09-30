@@ -21,6 +21,7 @@ class SubmitHack extends React.Component {
   state = {
     selected: {},
     text: '',
+    isWaiting: false,
   };
 
   render() {
@@ -33,16 +34,27 @@ class SubmitHack extends React.Component {
         title="Hack"
         button={{
           title: 'SUBMIT',
-          onPress: () => props
-            .submitHack({
-              text: trimmedText,
-              categories: selected.map(([id]) => Number(id)),
-            })
-            .then(() => Alert.alert('Successfully submitted hack', 'Thank you for your contribution!', [
-              { text: 'Done', onPress: () => props.navigation.pop() },
-            ]))
-            .catch(e => Alert.alert('Failed to submit hack', e.message)),
-          disabled: !trimmedText || !selected.length,
+          onPress: () => {
+            this.setState({ isWaiting: true });
+            props
+              .submitHack({
+                text: trimmedText,
+                categories: selected.map(([id]) => Number(id)),
+              })
+              .then(() => Alert.alert('Successfully submitted hack', 'Thank you for your contribution!', [
+                { text: 'Done', onPress: () => props.navigation.pop() },
+              ]))
+              .catch((e) => {
+                if (((e || {}).response || {}).status === 401) {
+                  Alert.alert('Session expired', 'Please re-login');
+                  props.navigation.navigate('Login');
+                } else {
+                  Alert.alert('Failed to submit hack', 'Please check your Internet connection.');
+                  this.setState({ isWaiting: false });
+                }
+              });
+          },
+          disabled: !trimmedText || !selected.length || this.state.isWaiting,
         }}
       >
         <Title>Hack Details</Title>
