@@ -8,24 +8,41 @@ import tki from '../../assets/tki.png';
 import mbti from '../../assets/mbti.png';
 import disc from '../../assets/disc.png';
 import hogan from '../../assets/hogan.png';
+import Logo from '../../assets/Logo';
+import Background from '../components/Background';
+import { WIDTH, HEIGHT } from '../constants';
+
+const BACKGROUND_RATIO = 0.667;
+const LOGO_SCALE = WIDTH / 360;
+const LOGO_PADDING = WIDTH / 20;
+const LOGO_SIZE = 24;
+const BUTTON_HEIGHT = 80;
+const LOGO_SPACE = LOGO_SIZE * LOGO_SCALE + LOGO_PADDING * 2;
+const IMAGE_HEIGHT = Math.min(WIDTH, HEIGHT * BACKGROUND_RATIO - LOGO_SPACE);
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'white',
-    flex: 1,
+  footer: {
     alignItems: 'center',
     justifyContent: 'space-between',
+    height: HEIGHT * (1 - BACKGROUND_RATIO),
   },
-  logo: {
+  title: {
+    padding: LOGO_PADDING,
+  },
+  image: {
     backgroundColor: 'black',
-    width: '100%',
+    width: WIDTH,
+    height: IMAGE_HEIGHT,
   },
   buttons: {
     flexDirection: 'row',
+    marginTop: HEIGHT * BACKGROUND_RATIO - IMAGE_HEIGHT - LOGO_SPACE - BUTTON_HEIGHT / 2,
   },
   button: {
-    marginLeft: 10,
-    marginRight: 10,
+    marginLeft: WIDTH / 60,
+    marginRight: WIDTH / 60,
+    height: BUTTON_HEIGHT,
+    width: WIDTH / 2 - (WIDTH / 60) * 3,
   },
   loginButton: {
     backgroundColor: 'white',
@@ -36,6 +53,10 @@ const styles = StyleSheet.create({
 
   logos: {
     flexDirection: 'row',
+  },
+  logo: {
+    width: WIDTH / 4,
+    height: WIDTH / 4,
   },
 
   termsContainer: {
@@ -51,36 +72,47 @@ const styles = StyleSheet.create({
 });
 
 const Home = props => (
-  <View style={styles.container}>
-    <Image source={background} style={styles.logo} />
-    <View style={styles.buttons}>
-      <Button
-        title="LOG IN"
-        style={[styles.button, styles.loginButton]}
-        textStyle={styles.loginText}
-      />
-      <Button
-        title="SIGN UP"
-        style={styles.button}
-        onPress={() => props.navigation.navigate('Register')}
-      />
+  <Background ratio={BACKGROUND_RATIO}>
+    <View style={styles.title}>
+      <Logo scale={LOGO_SCALE} />
     </View>
-    <View style={styles.logos}>
-      {[tki, mbti, disc, hogan].map(src => (
-        <Image source={src} key={src} />
-      ))}
-    </View>
-    <View style={styles.termsContainer}>
-      <Text style={styles.termsText}>By using this application you agree with our</Text>
-      <Text style={styles.termsText}>
-        <Text style={styles.underline}>Terms and Conditions</Text>
-        {' '}
+    <Image source={background} style={styles.image} />
+
+    <View style={styles.footer}>
+      <View style={styles.buttons}>
+        <Button
+          title="LOG IN"
+          style={[styles.button, styles.loginButton]}
+          textStyle={styles.loginText}
+        />
+        <Button
+          title="SIGN UP"
+          style={styles.button}
+          onPress={() => props.navigation.navigate('Register')}
+        />
+      </View>
+
+      <View style={styles.logos}>
+        {[tki, mbti, disc, hogan].map(src => (
+          <Image source={src} key={src} style={styles.logo} />
+        ))}
+      </View>
+      <View style={styles.termsContainer}>
+        <Text style={styles.termsText}>By using this application you agree with our</Text>
+        <Text style={styles.termsText}>
+          <Text style={styles.underline}>Terms and Conditions</Text>
+          {' '}
 |
-        {' '}
-        <Text style={styles.underline}>Privacy Policy</Text>
-      </Text>
+          {' '}
+          <Text style={styles.underline}>Privacy Policy</Text>
+        </Text>
+      </View>
     </View>
-  </View>
+  </Background>
 );
+
+Home.navigationOptions = {
+  header: null,
+};
 
 export default Home;

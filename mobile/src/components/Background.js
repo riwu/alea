@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -7,22 +7,19 @@ const styles = StyleSheet.create({
   },
   top: {
     backgroundColor: 'black',
-    flex: 0.375,
   },
   bottom: {
     backgroundColor: 'white',
-    flex: 1,
   },
   children: {
     position: 'absolute',
   },
 });
 
-const Background = ({ children }) => (
-  <View style={styles.container}>
-    <View style={styles.top} />
-
-    <View style={styles.bottom} />
+const Background = ({ children, style, ratio = 0.375 }) => (
+  <View style={[styles.container, style]}>
+    <View style={[styles.top, { flex: ratio }]} />
+    <View style={[styles.bottom, { flex: 1 - ratio }]} />
     <View style={styles.children}>{children}</View>
   </View>
 );

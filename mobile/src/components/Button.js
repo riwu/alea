@@ -13,12 +13,15 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.15,
     shadowRadius: 16,
-    maxWidth: 200,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonText: {
     textAlign: 'center',
     fontWeight: 'bold',
     color: 'white',
+    fontSize: 15,
   },
 });
 
