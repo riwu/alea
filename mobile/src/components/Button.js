@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.15,
     shadowRadius: 16,
+    maxWidth: 200,
   },
   buttonText: {
     textAlign: 'center',
@@ -22,18 +23,15 @@ const styles = StyleSheet.create({
 });
 
 const Button = ({
-  title, onPress, disabled, style, textStyle,
+  title, onPress, disabled, style, textStyle, children,
 }) => (
   <TouchableOpacity
     style={[styles.button, style, { opacity: disabled ? 0.5 : 1 }]}
     onPress={onPress}
     disabled={disabled}
   >
-    {typeof title !== 'string' ? (
-      title
-    ) : (
-      <Text style={[styles.buttonText, textStyle]}>{title}</Text>
-    )}
+    {title && <Text style={[styles.buttonText, textStyle]}>{title}</Text>}
+    {children}
   </TouchableOpacity>
 );
 
