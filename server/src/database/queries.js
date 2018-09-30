@@ -18,7 +18,7 @@ module.exports = {
     },
     userId,
   ]),
-  getUserInfo: userId => conn.query('SELECT adaptabilities FROM user WHERE id = ?', userId).then(rows => ({
+  getUserInfo: userId => conn.query('SELECT displayName, adaptabilities FROM user WHERE id = ?', userId).then(rows => ({
     ...rows[0],
     adaptabilities: JSON.parse((rows[0] || {}).adaptabilities || null),
   })),

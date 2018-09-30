@@ -11,6 +11,7 @@
 - Set environment variable
 
   - `SESSION_SECRET`: secret key for passport session
+  - `REDIS_DATABASE_INDEX`
 
   - `MYSQL_HOST`
   - `MYSQL_USER`
