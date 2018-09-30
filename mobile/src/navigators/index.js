@@ -4,11 +4,13 @@ import Register from '../pages/Register';
 import CustomizeProfile from '../pages/CustomizeProfile';
 import Profile from '../pages/Profile';
 import SubmitHack from '../pages/SubmitHack';
+import RequestFeedback from '../pages/RequestFeedback';
 
 export default createStackNavigator({
-  // Home,
-  // Register,
-  // CustomizeProfile,
-  // Profile,
+  Home,
+  Register,
+  CustomizeProfile,
+  Profile,
   SubmitHack,
+  RequestFeedback,
 });
