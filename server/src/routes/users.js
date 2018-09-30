@@ -4,14 +4,14 @@ const queries = require('../database/queries');
 
 const router = express.Router();
 
-router.post('/', async (req, res, next) => {
+router.post('/', (req, res, next) => {
   ['email', 'password', 'displayName'].forEach((key) => {
     const value = req.body[key];
     req.body[key] = typeof value === 'string' ? value.trim() : value;
   });
 
-  return queries
-    .addUser({ ...req.body, password: await bcrypt.hash(req.body.password, 10) })
+  bcrypt.hash(req.body.password, 10).then(password => queries
+    .addUser({ ...req.body, password })
     .then(({ insertId: id }) => {
       req.login({ id }, async (err) => {
         if (err) {
@@ -26,7 +26,7 @@ router.post('/', async (req, res, next) => {
       } else {
         next(e);
       }
-    });
+    }));
 });
 
 router.patch('/me', (req, res, next) => queries

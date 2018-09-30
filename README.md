@@ -2,10 +2,12 @@
 
 ## Mobile
 
-Create `env.js`
+- Create `env.js`
+- `yarn install`
 
 ## Server
 
+- `yarn install`
 - Set environment variable
 
   - `SESSION_SECRET`: secret key for passport session
