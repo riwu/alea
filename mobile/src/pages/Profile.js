@@ -1,10 +1,17 @@
 import React from 'react';
+import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import Button from '../components/Button';
 import data from './data';
 import Adaptabilities from '../components/Adaptabilities';
 import Page from '../components/Page';
 import Stats from '../components/Stats';
+
+const styles = StyleSheet.create({
+  stats: {
+    marginVertical: 20,
+  },
+});
 
 class Profile extends React.Component {
   state = {
@@ -19,7 +26,7 @@ class Profile extends React.Component {
           prefix={`${props.displayName}'s`}
           title="Profile"
           button={{
-            title: 'REQUEST FOR FEEDBACK',
+            title: 'REQUEST FOR\nFEEDBACK',
             onPress: () => props.navigation.navigate('RequestFeedback'),
           }}
           rightHeader={{
@@ -27,13 +34,12 @@ class Profile extends React.Component {
             items: ['Communication', 'Flexible', 'Confident'],
           }}
         >
-          <Stats />
+          <Stats style={styles.stats} />
           <Adaptabilities
             onPress={title => this.setState({ selected: title })}
             isSelected={title => this.state.selected === title}
           />
         </Page>
-
         <Button title="SUBMIT A HACK" onPress={() => props.navigation.navigate('SubmitHack')} />
       </React.Fragment>
     );

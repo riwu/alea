@@ -3,10 +3,8 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 const styles = StyleSheet.create({
   button: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 30,
-    paddingRight: 30,
+    paddingVertical: 10,
+    paddingHorizontal: 30,
     borderRadius: 8,
     backgroundColor: '#86BC25',
     alignSelf: 'center',

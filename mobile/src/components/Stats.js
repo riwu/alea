@@ -10,11 +10,12 @@ const styles = StyleSheet.create({
   },
   stat: {
     width: '30%',
-    margin: 3,
+    marginLeft: '2.5%',
     justifyContent: 'space-between',
   },
   statValueContainer: {
     flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
   statValue: {
     fontSize: 40,
@@ -26,8 +27,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const Stats = () => (
-  <View style={styles.stats}>
+const Stats = props => (
+  <View style={[styles.stats, props.style]}>
     {[
       {
         title: 'Current Leaderboard Ranking',

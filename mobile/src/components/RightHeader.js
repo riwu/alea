@@ -2,24 +2,23 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
-    paddingRight: 50,
-  },
   title: {
     color: 'white',
     fontSize: 25,
+    marginBottom: 3,
   },
   item: {
     color: 'white',
     borderColor: '#86BC25',
     borderWidth: 1,
     borderRadius: 12,
-    padding: 3,
+    paddingVertical: 3,
+    paddingHorizontal: 10,
   },
 });
 
 const RightHeader = props => (
-  <View style={styles.container}>
+  <View>
     <Text style={styles.title}>{props.title}</Text>
     <View>
       {props.items.map(item => (

@@ -39,8 +39,7 @@ const styles = StyleSheet.create({
     marginTop: HEIGHT * BACKGROUND_RATIO - IMAGE_HEIGHT - LOGO_SPACE - BUTTON_HEIGHT / 2,
   },
   button: {
-    marginLeft: WIDTH / 60,
-    marginRight: WIDTH / 60,
+    marginHorizontal: WIDTH / 60,
     height: BUTTON_HEIGHT,
     width: WIDTH / 2 - (WIDTH / 60) * 3,
   },

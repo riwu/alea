@@ -7,16 +7,21 @@ const styles = StyleSheet.create({
   adaptabilities: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginHorizontal: 15,
   },
   button: {
-    width: 130,
+    width: '35%',
+    flexDirection: 'column',
+    paddingHorizontal: 10,
   },
   unselected: {
     backgroundColor: 'white',
-    width: 80,
+    width: '20%',
   },
   buttonText: {
     color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 
