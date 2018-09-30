@@ -12,4 +12,5 @@ const [get, post, patch] = ['get', 'post', 'patch'].map(method => (path, data) =
   }).then(response => response.data);
 });
 
-export const register = user => Promise.resolve();
+export const register = user => post('users', user);
+export const login = user => post('sessions', user);

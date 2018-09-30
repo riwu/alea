@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert } from 'react-native';
 import { connect } from 'react-redux';
-import Authentication from './Authentication';
+import Authentication from '../components/Authentication';
 import { register } from '../actions';
 
 const Register = props => (

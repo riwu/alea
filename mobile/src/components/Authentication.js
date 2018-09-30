@@ -1,8 +1,8 @@
 import React from 'react';
 import { Alert } from 'react-native';
-import TextInput from '../components/TextInput';
-import Title from '../components/Title';
-import PageWithCard from '../components/PageWithCard';
+import TextInput from './TextInput';
+import Title from './Title';
+import PageWithCard from './PageWithCard';
 
 class Authentication extends React.Component {
   state = {
@@ -21,7 +21,7 @@ class Authentication extends React.Component {
           title: 'NEXT',
           onPress: () => {
             const [displayName, email, password] = ['displayName', 'email', 'password'].map(key => this.state[key].trim());
-            if (!displayName) {
+            if (props.hasDisplayName && !displayName) {
               Alert.alert('Display name cannot be empty');
               return;
             }
@@ -37,7 +37,7 @@ class Authentication extends React.Component {
             props.onSubmit({
               email,
               password,
-              displayName,
+              ...(props.hasDisplayName && { displayName }),
             });
           },
         }}
