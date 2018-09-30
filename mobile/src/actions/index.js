@@ -10,7 +10,8 @@ export const setUser = (user) => {
 };
 
 export const register = user => dispatch => api.register(user).then(() => dispatch(setUser(user)));
-export const login = user => dispatch => api.login(user).then(() => dispatch(setUser(user)));
+export const login = user => dispatch => api.login(user).then(userInfo => dispatch(setUser({ ...user, ...userInfo })));
+export const updateUser = user => dispatch => api.updateUser(user).then(() => dispatch(setUser(user)));
 
 export const getHacks = () => dispatch => api.getHacks().then(hacks => dispatch({
   type: types.SET_HACKS,

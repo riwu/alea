@@ -10,7 +10,7 @@ const Login = props => (
     title="Hogan Report"
     onSubmit={data => props
       .login(data)
-      .then(() => props.navigation.navigate('Profile'))
+      .then(action => props.navigation.navigate(action.user.adaptabilities ? 'Profile' : 'CustomizeProfile')) // if not yet customize profile
       .catch((err) => {
         console.log('err', err);
         if (((err || {}).response || {}).status === 401) {

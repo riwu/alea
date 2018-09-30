@@ -29,4 +29,9 @@ router.post('/', async (req, res, next) => {
     });
 });
 
+router.patch('/me', (req, res, next) => queries
+  .updateUser(req.user.id, req.body)
+  .then(() => res.end())
+  .catch(next));
+
 module.exports = router;

@@ -1,14 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  StyleSheet, View, Text, TouchableOpacity, FlatList,
+  StyleSheet, View, Text, TouchableOpacity, FlatList, Alert,
 } from 'react-native';
 import { LinearGradient } from 'expo';
-import { register } from '../actions';
+import { updateUser } from '../actions';
 import Title from '../components/Title';
 import data from './data';
 import { WIDTH } from '../constants';
 import PageWithCard from '../components/PageWithCard';
+import handleSessionExpired from '../util/handleSessionExpired';
 
 const dataArr = Object.entries(data);
 
@@ -58,7 +59,21 @@ class CustomizeProfile extends React.Component {
             if (this.state.index < dataArr.length - 1) {
               this.setState(prevState => ({ index: prevState.index + 1 }));
             } else {
-              props.navigation.navigate('Profile');
+              props
+                .updateUser({
+                  adaptabilities: Object.entries(this.state.selected)
+                    .filter(([, isSelected]) => isSelected)
+                    .map(([id]) => Number(id)),
+                })
+                .then(() => props.navigation.navigate('Profile'))
+                .catch((e) => {
+                  if (!handleSessionExpired(e, props)) {
+                    Alert.alert(
+                      'Failed to update profile',
+                      'Please check your Internet connection.',
+                    );
+                  }
+                });
             }
           },
         }}
@@ -91,5 +106,5 @@ class CustomizeProfile extends React.Component {
 }
 export default connect(
   null,
-  { register },
+  { updateUser },
 )(CustomizeProfile);

@@ -5,6 +5,7 @@ import { submitHack } from '../actions';
 import Title from '../components/Title';
 import Adaptabilities from '../components/Adaptabilities';
 import PageWithCard from '../components/PageWithCard';
+import handleSessionExpired from '../util/handleSessionExpired';
 
 const styles = StyleSheet.create({
   input: {
@@ -45,10 +46,7 @@ class SubmitHack extends React.Component {
                 { text: 'Done', onPress: () => props.navigation.pop() },
               ]))
               .catch((e) => {
-                if (((e || {}).response || {}).status === 401) {
-                  Alert.alert('Session expired', 'Please re-login');
-                  props.navigation.navigate('Login');
-                } else {
+                if (!handleSessionExpired(e, props)) {
                   Alert.alert('Failed to submit hack', 'Please check your Internet connection.');
                   this.setState({ isWaiting: false });
                 }
