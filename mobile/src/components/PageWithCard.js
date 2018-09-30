@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
   card: {
     width: WIDTH - 40,
     margin: 20,
+    padding: 25,
   },
 });
 

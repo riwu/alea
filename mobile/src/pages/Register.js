@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Alert, KeyboardAvoidingView } from 'react-native';
+import { Alert } from 'react-native';
 import { register } from '../actions';
 import TextInput from '../components/TextInput';
 import Title from '../components/Title';
@@ -57,29 +57,27 @@ class Register extends React.Component {
           },
         }}
       >
-        <KeyboardAvoidingView behavior="position">
-          <Title>Account Details</Title>
-          <TextInput
-            onChangeText={displayName => this.setState({ displayName })}
-            autoCapitalize="words"
-            maxLength={20}
-            autoCorrect={false}
-            placeholder="Name"
-          />
-          <TextInput
-            onChangeText={email => this.setState({ email })}
-            autoCorrect={false}
-            autoCapitalize="none"
-            maxLength={30}
-            placeholder="Email"
-          />
-          <TextInput
-            onChangeText={password => this.setState({ password })}
-            secureTextEntry
-            autoCapitalize="none"
-            placeholder="Password"
-          />
-        </KeyboardAvoidingView>
+        <Title>Account Details</Title>
+        <TextInput
+          onChangeText={displayName => this.setState({ displayName })}
+          autoCapitalize="words"
+          maxLength={20}
+          autoCorrect={false}
+          placeholder="Name"
+        />
+        <TextInput
+          onChangeText={email => this.setState({ email })}
+          autoCorrect={false}
+          autoCapitalize="none"
+          maxLength={30}
+          placeholder="Email"
+        />
+        <TextInput
+          onChangeText={password => this.setState({ password })}
+          secureTextEntry
+          autoCapitalize="none"
+          placeholder="Password"
+        />
       </PageWithCard>
     );
   }

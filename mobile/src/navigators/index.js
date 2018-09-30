@@ -1,16 +1,8 @@
-import { createStackNavigator } from 'react-navigation';
-import Home from '../pages/Home';
-import Register from '../pages/Register';
-import CustomizeProfile from '../pages/CustomizeProfile';
-import Profile from '../pages/Profile';
-import SubmitHack from '../pages/SubmitHack';
-import RequestFeedback from '../pages/RequestFeedback';
+import { createSwitchNavigator } from 'react-navigation';
+import Authentication from './Authentication';
+import App from './App';
 
-export default createStackNavigator({
-  Home,
-  Register,
-  CustomizeProfile,
-  Profile,
-  SubmitHack,
-  RequestFeedback,
+export default createSwitchNavigator({
+  Authentication,
+  App,
 });
