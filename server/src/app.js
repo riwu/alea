@@ -11,6 +11,7 @@ app.use(require('cookie-parser')());
 
 app.use(require('./middleware/authentication'));
 
+app.use('/users/me', require('./routes/user'));
 app.use('/users', require('./routes/users'));
 app.use('/sessions', require('./routes/sessions'));
 app.use('/hacks', require('./routes/hacks'));

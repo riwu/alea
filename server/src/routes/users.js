@@ -32,6 +32,7 @@ router.post('/', (req, res, next) => {
 router.patch('/me', (req, res, next) => queries
   .updateUser(req.user.id, req.body)
   .then(() => res.end())
+  .catch(next));
 
 router.post('/me/members', (req, res, next) => queries
   .addTeamMember(req.user.id, req.body)
