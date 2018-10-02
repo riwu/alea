@@ -9,8 +9,17 @@ export const setUser = (user) => {
   };
 };
 
+export const getMembers = () => dispatch => api.getMembers().then(members => dispatch({
+  type: types.SET_MEMBERS,
+  members,
+}));
+
 export const register = user => dispatch => api.register(user).then(() => dispatch(setUser(user)));
-export const login = user => dispatch => api.login(user).then(userInfo => dispatch(setUser({ ...user, ...userInfo })));
+export const login = user => dispatch => api.login(user).then((userInfo) => {
+  dispatch(getMembers());
+  return dispatch(setUser({ ...user, ...userInfo }));
+});
+
 export const updateUser = user => dispatch => api.updateUser(user).then(() => dispatch(setUser(user)));
 
 export const getHacks = () => dispatch => api.getHacks().then(hacks => dispatch({

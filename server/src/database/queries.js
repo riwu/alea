@@ -34,4 +34,5 @@ module.exports = {
   ]),
 
   addTeamMember: (userId, member) => conn.query('INSERT INTO TeamMember SET ?', { ...member, User_id: userId }),
+  getTeamMembers: userId => conn.query('SELECT id, name, email FROM TeamMember WHERE User_id = ?', userId),
 };

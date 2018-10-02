@@ -13,6 +13,22 @@ router.patch('/', (req, res, next) => queries
 router.post('/members', (req, res, next) => queries
   .addTeamMember(req.user.id, req.body)
   .then(({ insertId }) => res.send({ id: insertId }))
+  .catch((e) => {
+    if (e.code === 'ER_DUP_ENTRY') {
+      res.sendStatus(409);
+    } else {
+      next(e);
+    }
+  }));
+
+router.get('/members', (req, res, next) => queries
+  .getTeamMembers(req.user.id)
+  .then(members => res.send(
+    members.reduce((acc, { id, ...member }) => {
+      acc[id] = member;
+      return acc;
+    }, {}),
+  ))
   .catch(next));
 
 module.exports = router;

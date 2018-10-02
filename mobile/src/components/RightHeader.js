@@ -24,8 +24,8 @@ const RightHeader = props => (
     <Text style={styles.title}>{props.title}</Text>
     <View>
       {props.items.map(item => (
-        <Text key={item} style={styles.item}>
-          {item}
+        <Text key={item.id} style={styles.item}>
+          {item.label}
         </Text>
       ))}
     </View>

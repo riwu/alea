@@ -40,7 +40,7 @@ class RequestFeedback extends React.Component {
           title: 'Team Members',
           items: Object.entries(this.state.selected)
             .filter(([, selected]) => selected)
-            .map(([id]) => props.members[id].name),
+            .map(([id]) => ({ id, label: props.members[id].name })),
         }}
       >
         <View style={styles.headerContainer}>

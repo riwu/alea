@@ -18,3 +18,4 @@ export const submitHack = hack => post('hacks', hack);
 export const getHacks = () => get('hacks');
 export const updateUser = user => patch('users/me', user);
 export const addMember = member => post('users/me/members', member);
+export const getMembers = () => get('users/me/members');
