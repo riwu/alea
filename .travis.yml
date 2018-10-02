@@ -4,5 +4,9 @@ node_js:
 cache:
   directories:
     - server/node_modules
-before_install:
-  - cd server
+    - web/node_modules
+env:
+  - TEST_DIR=server
+  - TEST_DIR=web
+script:
+  - cd $TEST_DIR && yarn && yarn test
