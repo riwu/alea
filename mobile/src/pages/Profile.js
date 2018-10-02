@@ -26,14 +26,16 @@ const Profile = props => (
   <Page
     prefix={`${props.displayName}'s`}
     title="Profile"
-    button={{
-      title: 'REQUEST FOR\nFEEDBACK',
-      onPress: () => props.navigation.navigate('RequestFeedback'),
-    }}
-    rightHeader={{
-      title: 'My values',
-      items: ['Communication', 'Flexible', 'Confident'],
-    }}
+    buttons={[
+      {
+        title: 'How am\nI doing',
+        onPress: () => props.navigation.navigate('RequestFeedback'),
+      },
+      {
+        title: 'How others\nare doing',
+        onPress: () => props.navigation.navigate('RequestFeedback'),
+      },
+    ]}
   >
     <ScrollView>
       <Stats style={styles.stats} />

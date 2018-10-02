@@ -18,6 +18,9 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginTop: 10,
   },
+  button: {
+    marginRight: 10,
+  },
   backButton: {
     backgroundColor: 'black',
     borderColor: '#86BC25',
@@ -28,6 +31,7 @@ const styles = StyleSheet.create({
 
 const Page = (props) => {
   const Component = props.keyboardAvoidingView ? KeyboardAvoidingView : View;
+  const buttons = props.buttons || [props.button];
   return (
     <Background>
       <Component
@@ -42,7 +46,9 @@ const Page = (props) => {
               {props.backAction && (
                 <Button title="BACK" onPress={props.backAction} style={styles.backButton} />
               )}
-              <Button {...props.button} />
+              {buttons.map(button => (
+                <Button key={button.title} {...button} style={styles.button} />
+              ))}
             </View>
           </View>
           {props.rightHeader && <RightHeader {...props.rightHeader} />}
