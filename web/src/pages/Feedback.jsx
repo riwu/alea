@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Input, Button, Checkbox, message,
-} from 'antd';
+import { Input, Button, Checkbox } from 'antd';
 import data from './data';
 import styles from './Feedback.module.css';
 
