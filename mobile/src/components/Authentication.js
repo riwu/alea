@@ -3,6 +3,8 @@ import { Alert } from 'react-native';
 import TextInput from './TextInput';
 import Title from './Title';
 import PageWithCard from './PageWithCard';
+import { NameInput, EmailInput } from './TextInputs';
+import isValidEmail from '../util/isValidEmail';
 
 class Authentication extends React.Component {
   state = {
@@ -26,7 +28,7 @@ class Authentication extends React.Component {
               Alert.alert('Display name cannot be empty');
               return;
             }
-            if (!/^\S+@\S+$/.test(email)) {
+            if (!isValidEmail(email)) {
               Alert.alert('Invalid email address');
               return;
             }
@@ -45,24 +47,9 @@ class Authentication extends React.Component {
       >
         <Title>Account Details</Title>
         {props.hasDisplayName && (
-          <TextInput
-            onChangeText={displayName => this.setState({ displayName })}
-            autoCapitalize="words"
-            maxLength={20}
-            autoCorrect={false}
-            placeholder="Name"
-            textContentType="name"
-          />
+          <NameInput onChangeText={displayName => this.setState({ displayName })} />
         )}
-        <TextInput
-          onChangeText={email => this.setState({ email })}
-          autoCorrect={false}
-          autoCapitalize="none"
-          maxLength={30}
-          placeholder="Email"
-          textContentType="emailAddress"
-          keyboardType="email-address"
-        />
+        <EmailInput onChangeText={email => this.setState({ email })} />
         <TextInput
           onChangeText={password => this.setState({ password })}
           secureTextEntry

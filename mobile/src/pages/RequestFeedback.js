@@ -1,8 +1,21 @@
 import React from 'react';
+import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { register } from '../actions';
 import Title from '../components/Title';
 import PageWithCard from '../components/PageWithCard';
+import AddMember from '../components/AddMember';
+
+const styles = StyleSheet.create({
+  headerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  add: {
+    marginBottom: 20,
+  },
+});
 
 class RequestFeedback extends React.Component {
   state = {
@@ -21,7 +34,10 @@ class RequestFeedback extends React.Component {
           items: this.state.selected,
         }}
       >
-        <Title>Add Team Members</Title>
+        <View style={styles.headerContainer}>
+          <Title>Select Team Members</Title>
+          <AddMember style={styles.add} />
+        </View>
       </PageWithCard>
     );
   }

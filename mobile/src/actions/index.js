@@ -26,3 +26,9 @@ export const moveHackToEnd = category => ({
   type: types.MOVE_HACK_TO_END,
   category,
 });
+
+export const addMember = member => dispatch => api.addMember(member).then(({ id }) => dispatch({
+  type: types.ADD_MEMBER,
+  id,
+  member,
+}));

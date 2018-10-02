@@ -17,3 +17,4 @@ export const login = user => post('sessions', user);
 export const submitHack = hack => post('hacks', hack);
 export const getHacks = () => get('hacks');
 export const updateUser = user => patch('users/me', user);
+export const addMember = member => post('users/me/members', member);
