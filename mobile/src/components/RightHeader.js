@@ -2,10 +2,12 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 5,
+  },
   title: {
     color: 'white',
-    fontSize: 25,
-    marginBottom: 3,
+    margin: 3,
   },
   item: {
     color: 'white',
@@ -18,7 +20,7 @@ const styles = StyleSheet.create({
 });
 
 const RightHeader = props => (
-  <View>
+  <View style={styles.container}>
     <Text style={styles.title}>{props.title}</Text>
     <View>
       {props.items.map(item => (

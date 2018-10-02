@@ -18,7 +18,7 @@ router.use(
     saveUninitialized: false,
     resave: false,
     store: new RedisStore({
-      db: Number(process.env.REDIS_DATABASE_INDEX),
+      db: Number(process.env.REDIS_DATABASE_INDEX) || 0,
     }),
   }),
 );
