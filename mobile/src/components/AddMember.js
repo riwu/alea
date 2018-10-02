@@ -6,6 +6,7 @@ import { addMember } from '../actions';
 import Button from './Button';
 import { NameInput, EmailInput } from './TextInputs';
 import isValidEmail from '../util/isValidEmail';
+import handleSessionExpired from '../util/handleSessionExpired';
 
 const styles = StyleSheet.create({
   modalView: {
@@ -63,12 +64,16 @@ class AddMember extends React.Component {
                   props
                     .addMember({ name, email }) // allow empty name
                     .then(() => this.toggleModal())
-                    .catch(e => Alert.alert(
-                      'Failed to add member',
-                      ((e || {}).response || {}).status === 409
-                        ? 'An existing member has the same email'
-                        : e.message,
-                    ));
+                    .catch((e) => {
+                      if (!handleSessionExpired(e, props)) {
+                        Alert.alert(
+                          'Failed to add member',
+                          ((e || {}).response || {}).status === 409
+                            ? 'An existing member has the same email'
+                            : e.message,
+                        );
+                      }
+                    });
                 }}
                 title="Add"
               />

@@ -49,8 +49,8 @@ class RequestFeedback extends React.Component {
         }}
       >
         <View style={styles.headerContainer}>
-          <Title>Select Team Members</Title>
-          <AddMember style={styles.add} />
+          <Title>Select Members</Title>
+          <AddMember navigation={props.navigation} style={styles.add} />
         </View>
         <FlatList
           data={Object.entries(props.members)}
@@ -80,7 +80,13 @@ class RequestFeedback extends React.Component {
             </ListItem>
           )}
         />
-        {items.length && <DeleteMembers style={styles.delete} ids={items.map(({ id }) => id)} />}
+        {items.length && (
+          <DeleteMembers
+            navigation={props.navigation}
+            style={styles.delete}
+            ids={items.map(({ id }) => id)}
+          />
+        )}
       </PageWithCard>
     );
   }

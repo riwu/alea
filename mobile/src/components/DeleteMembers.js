@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Alert } from 'react-native';
 import Button from './Button';
 import { deleteMembers } from '../actions';
+import handleSessionExpired from '../util/handleSessionExpired';
 
 const DeleteMembers = props => (
   <Button
@@ -11,7 +12,11 @@ const DeleteMembers = props => (
     onPress={() => props
       .deleteMembers(props.ids)
       .then(() => Alert.alert('Successfully deleted selected members'))
-      .catch(e => Alert.alert('Failed to delete members', e.message))
+      .catch((e) => {
+        if (!handleSessionExpired(e, props)) {
+          Alert.alert('Failed to delete members', e.message);
+        }
+      })
     }
   />
 );
