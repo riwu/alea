@@ -1,5 +1,6 @@
 import React from 'react';
 import { Alert } from 'react-native';
+import { Form } from 'native-base';
 import TextInput from './TextInput';
 import Title from './Title';
 import PageWithCard from './PageWithCard';
@@ -46,17 +47,19 @@ class Authentication extends React.Component {
         }}
       >
         <Title>Account Details</Title>
-        {props.hasDisplayName && (
-          <NameInput onChangeText={displayName => this.setState({ displayName })} />
-        )}
-        <EmailInput onChangeText={email => this.setState({ email })} />
-        <TextInput
-          onChangeText={password => this.setState({ password })}
-          secureTextEntry
-          autoCapitalize="none"
-          placeholder="Password"
-          textContentType="password"
-        />
+        <Form>
+          {props.hasDisplayName && (
+            <NameInput onChangeText={displayName => this.setState({ displayName })} />
+          )}
+          <EmailInput onChangeText={email => this.setState({ email })} />
+          <TextInput
+            onChangeText={password => this.setState({ password })}
+            secureTextEntry
+            autoCapitalize="none"
+            placeholder="Password"
+            textContentType="password"
+          />
+        </Form>
       </PageWithCard>
     );
   }

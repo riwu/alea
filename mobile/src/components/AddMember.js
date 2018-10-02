@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import Modal from 'react-native-modal';
+import { Form } from 'native-base';
 import { addMember } from '../actions';
 import Button from './Button';
 import { NameInput, EmailInput } from './TextInputs';
@@ -43,8 +44,10 @@ class AddMember extends React.Component {
       <React.Fragment>
         <Modal isVisible={this.state.modalVisible}>
           <View style={styles.modalView}>
-            <NameInput onChangeText={name => this.setState({ name })} />
-            <EmailInput onChangeText={email => this.setState({ email })} />
+            <Form>
+              <NameInput onChangeText={name => this.setState({ name })} />
+              <EmailInput onChangeText={email => this.setState({ email })} />
+            </Form>
             <View style={styles.buttons}>
               <Button
                 onPress={this.toggleModal}

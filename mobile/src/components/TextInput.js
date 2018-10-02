@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, TextInput } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Item, Input, Label } from 'native-base';
 
 const styles = StyleSheet.create({
   container: {
@@ -9,6 +10,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const Input = props => <TextInput style={styles.container} {...props} />;
+const TextInput = ({ placeholder, ...props }) => (
+  <Item floatingLabel>
+    <Label>{placeholder}</Label>
+    <Input style={styles.container} {...props} />
+  </Item>
+);
 
-export default Input;
+export default TextInput;
