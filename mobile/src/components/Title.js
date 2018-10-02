@@ -9,6 +9,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const Title = ({ children }) => <Text style={styles.title}>{children}</Text>;
+const Title = ({ children, style }) => <Text style={[styles.title, style]}>{children}</Text>;
 
 export default Title;

@@ -5,8 +5,12 @@ import Button from '../components/Button';
 import Page from '../components/Page';
 import Stats from '../components/Stats';
 import Hacks from '../components/Hacks';
+import Graph from '../components/Graph';
 
 const styles = StyleSheet.create({
+  graph: {
+    marginTop: 20,
+  },
   stats: {
     marginVertical: 20,
   },
@@ -38,6 +42,7 @@ const Profile = props => (
     ]}
   >
     <ScrollView>
+      <Graph style={styles.graph} />
       <Stats style={styles.stats} />
       <View style={styles.hacks}>
         <Hacks />
