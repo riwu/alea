@@ -1,0 +1,10 @@
+.container {
+  text-align: center;
+  padding: 10% 5%;
+}
+
+.success {
+  font-size: 72px;
+  margin-bottom: 30px;
+  color: #52c41a;
+}
