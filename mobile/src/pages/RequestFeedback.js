@@ -8,6 +8,7 @@ import { register } from '../actions';
 import Title from '../components/Title';
 import PageWithCard from '../components/PageWithCard';
 import AddMember from '../components/AddMember';
+import DeleteMembers from '../components/DeleteMembers';
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -22,6 +23,9 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: 'gray',
   },
+  delete: {
+    alignSelf: 'flex-end',
+  },
 });
 
 class RequestFeedback extends React.Component {
@@ -31,6 +35,9 @@ class RequestFeedback extends React.Component {
 
   render() {
     const { props } = this;
+    const items = Object.entries(this.state.selected)
+      .filter(([id, selected]) => selected && props.members[id])
+      .map(([id]) => ({ id, label: props.members[id].name }));
     return (
       <PageWithCard
         prefix="Request"
@@ -38,9 +45,7 @@ class RequestFeedback extends React.Component {
         button={{ title: 'SEND' }}
         rightHeader={{
           title: 'Team Members',
-          items: Object.entries(this.state.selected)
-            .filter(([, selected]) => selected)
-            .map(([id]) => ({ id, label: props.members[id].name })),
+          items,
         }}
       >
         <View style={styles.headerContainer}>
@@ -75,6 +80,7 @@ class RequestFeedback extends React.Component {
             </ListItem>
           )}
         />
+        {items.length && <DeleteMembers style={styles.delete} ids={items.map(({ id }) => id)} />}
       </PageWithCard>
     );
   }

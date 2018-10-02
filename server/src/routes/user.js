@@ -31,4 +31,9 @@ router.get('/members', (req, res, next) => queries
   ))
   .catch(next));
 
+router.delete('/members/:ids', (req, res, next) => queries
+  .deleteTeamMembers(req.user.id, (req.params.ids || '').split(','))
+  .then(() => res.end())
+  .catch(next));
+
 module.exports = router;

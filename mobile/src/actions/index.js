@@ -41,3 +41,8 @@ export const addMember = member => dispatch => api.addMember(member).then(({ id 
   id,
   member,
 }));
+
+export const deleteMembers = ids => dispatch => api.deleteMembers(ids.join(',')).then(() => dispatch({
+  type: types.DELETE_MEMBERS,
+  ids,
+}));

@@ -3,7 +3,7 @@ import env from '../../env';
 
 axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? 'http://192.168.1.105:3000/' : env.SERVER_URL;
 
-const [get, post, patch] = ['get', 'post', 'patch'].map(method => (path, data) => {
+const [get, post, patch, del] = ['get', 'post', 'patch', 'delete'].map(method => (path, data) => {
   console.log('request', method, path, data);
   return axios({
     method,
@@ -19,3 +19,4 @@ export const getHacks = () => get('hacks');
 export const updateUser = user => patch('users/me', user);
 export const addMember = member => post('users/me/members', member);
 export const getMembers = () => get('users/me/members');
+export const deleteMembers = ids => del(`users/me/members/${ids}`);
