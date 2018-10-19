@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
 import {
-  ListItem, CheckBox, Text, Left, Body, Right, Icon,
+  View, StyleSheet, FlatList, Alert,
+} from 'react-native';
+import {
+  ListItem, CheckBox, Text, Left, Body, Right, Icon, Toast,
 } from 'native-base';
 import { connect } from 'react-redux';
 import { register } from '../actions';
@@ -9,6 +11,7 @@ import Title from '../components/Title';
 import PageWithCard from '../components/PageWithCard';
 import AddMember from '../components/AddMember';
 import DeleteMembers from '../components/DeleteMembers';
+import { requestFeedback } from '../actions/api';
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -35,17 +38,34 @@ class RequestFeedback extends React.Component {
 
   render() {
     const { props } = this;
-    const items = Object.entries(this.state.selected)
+    const selectedIds = Object.entries(this.state.selected)
       .filter(([id, selected]) => selected && props.members[id])
-      .map(([id]) => ({ id, label: props.members[id].name }));
+      .map(([id]) => id);
     return (
       <PageWithCard
         prefix="Request"
         title="Feedback"
-        button={{ title: 'SEND' }}
+        button={{
+          title: 'SEND',
+          disabled: selectedIds.length === 0,
+          onPress: () => {
+            requestFeedback(selectedIds.map(id => props.members[id].email))
+              .then(() => {
+                this.setState({ selected: {} });
+                Toast.show({
+                  text: 'Feedback requested!',
+                  type: 'success',
+                  duration: 3000,
+                });
+              })
+              .catch((e) => {
+                Alert.alert('Feedback request failed', e.response.data);
+              });
+          },
+        }}
         rightHeader={{
           title: 'Team Members',
-          items,
+          items: selectedIds.map(id => ({ id, label: props.members[id].name })),
         }}
       >
         <View style={styles.headerContainer}>
@@ -80,12 +100,8 @@ class RequestFeedback extends React.Component {
             </ListItem>
           )}
         />
-        {items.length && (
-          <DeleteMembers
-            navigation={props.navigation}
-            style={styles.delete}
-            ids={items.map(({ id }) => id)}
-          />
+        {selectedIds.length && (
+          <DeleteMembers navigation={props.navigation} style={styles.delete} ids={selectedIds} />
         )}
       </PageWithCard>
     );

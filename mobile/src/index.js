@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { Updates } from 'expo';
 import { PersistGate } from 'redux-persist/es/integration/react';
 import { persistStore } from 'redux-persist';
+import { Root } from 'native-base';
 import store from './store';
 import Navigator from './navigators';
 import { getHacks } from './actions';
@@ -24,10 +25,12 @@ const styles = StyleSheet.create({
 const App = () => (
   <Provider store={store}>
     <PersistGate persistor={persistor}>
-      <Navigator
-        persistenceKey="NavigationState"
-        renderLoadingExperimental={() => <Image source={splash} style={styles.image} />}
-      />
+      <Root>
+        <Navigator
+          persistenceKey="NavigationState"
+          renderLoadingExperimental={() => <Image source={splash} style={styles.image} />}
+        />
+      </Root>
     </PersistGate>
   </Provider>
 );

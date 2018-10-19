@@ -23,6 +23,8 @@ module.exports = {
     adaptabilities: JSON.parse((rows[0] || {}).adaptabilities || null),
   })),
 
+  getDisplayName: userId => conn.query('SELECT displayName, email FROM User WHERE id = ?', userId).then(rows => rows[0]),
+
   getHacks: () => conn.query('SELECT text, categories FROM Hack').then(rows => rows.map(row => ({
     ...row,
     categories: JSON.parse(row.categories),

@@ -36,7 +36,7 @@ const Profile = props => (
         onPress: () => props.navigation.navigate('RequestFeedback'),
       },
       {
-        title: 'How others\nare doing',
+        title: 'How are\nothers doing',
         onPress: () => props.navigation.navigate('RequestFeedback'),
       },
     ]}
