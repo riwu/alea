@@ -1,9 +1,7 @@
 import React from 'react';
+import { View, StyleSheet, FlatList } from 'react-native';
 import {
-  View, StyleSheet, FlatList, Alert,
-} from 'react-native';
-import {
-  ListItem, CheckBox, Text, Left, Body, Right, Icon, Toast, Spinner,
+  ListItem, CheckBox, Text, Left, Body, Right, Icon,
 } from 'native-base';
 import { connect } from 'react-redux';
 import Title from './Title';

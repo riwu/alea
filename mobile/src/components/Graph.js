@@ -76,7 +76,7 @@ const Graph = (props) => {
   return (
     <Card style={props.style}>
       <Swiper loadMinimal height="auto" activeDotColor="#86BC25">
-        {props.data.map(info => (
+        {graphData.map(info => (
           <View key={info.id} style={styles.graphContainer}>
             <Title style={styles.title}>{info.title}</Title>
             <VictoryChart theme={VictoryTheme.material} height={200}>
@@ -104,10 +104,6 @@ const Graph = (props) => {
       </Swiper>
     </Card>
   );
-};
-
-Graph.defaultProps = {
-  data: graphData,
 };
 
 export default connect(state => ({

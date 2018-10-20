@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Alert } from 'react-native';
 import { Toast } from 'native-base';
 import { requestFeedback } from '../actions/api';
@@ -33,7 +34,7 @@ class RequestFeedback extends React.Component {
             })
             .catch((e) => {
               this.setState({ isWaiting: false });
-              Alert.alert('Feedback request failed', (e.response || {}).data);
+              Alert.alert('Feedback request failed', e.message);
             });
         }}
       >
@@ -43,4 +44,4 @@ class RequestFeedback extends React.Component {
   }
 }
 
-export default RequestFeedback;
+export default connect(state => ({ members: state.members }))(RequestFeedback);
