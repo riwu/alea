@@ -19,6 +19,25 @@ const transporter = nodemailer.createTransport({
   sendingRate: 14,
 });
 
+router.post('/', (req, res, next) => queries
+  .postFeedback(req.query.t, req.body.adaptabilities, req.body.comments)
+  .then(() => {
+    res.end();
+    return queries.deleteFeedbackToken(req.query.t);
+  })
+  .catch(next));
+
+router.get('/request', (req, res, next) => queries
+  .getFeedbackRequestInfo(req.query.t)
+  .then((info) => {
+    if (info) {
+      res.send(info);
+    } else {
+      res.sendStatus(404);
+    }
+  })
+  .catch(next));
+
 router.post('/request', authenticate, async (req, res, next) => {
   try {
     const { displayName, email } = await queries.getFeedbackRequesterInfo(req.user.id);

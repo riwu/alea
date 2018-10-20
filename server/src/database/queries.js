@@ -31,6 +31,25 @@ module.exports = {
 
   getMemberEmails: (userId, ids) => conn.query('SELECT id, email FROM TeamMember WHERE User_id = ? AND id IN (?)', [userId, ids]),
 
+  getFeedbackRequestInfo: token => conn
+    .query(
+      `SELECT User.displayName AS requesterName, User.email AS requesterEmail, TeamMember.name AS teamMemberName, TeamMember.email AS teamMemberEmail 
+       FROM FeedbackToken
+       JOIN TeamMember ON FeedbackToken.TeamMember_id = TeamMember.id 
+       JOIN User ON TeamMember.User_id = User.id
+       WHERE FeedbackToken.token = ?`,
+      token,
+    )
+    .then(rows => rows[0]),
+
+  postFeedback: (token, adaptabilities, comments) => conn.query(
+    `INSERT INTO Feedback SET adaptabilities = ?, comments = ?, TeamMember_id = 
+     (SELECT TeamMember_id FROM FeedbackToken WHERE token = ? AND (CURRENT_TIMESTAMP - inserted < 31536000))`,
+    [JSON.stringify(adaptabilities), comments, token],
+  ),
+
+  deleteFeedbackToken: token => conn.query('DELETE FROM FeedbackToken WHERE token = ?', token),
+
   getHacks: () => conn.query('SELECT text, categories FROM Hack').then(rows => rows.map(row => ({
     ...row,
     categories: JSON.parse(row.categories),

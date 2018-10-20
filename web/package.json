@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "antd": "^3.9.3",
+    "axios": "^0.18.0",
     "babel-plugin-import": "^1.9.1",
     "react": "^16.5.2",
     "react-app-rewire-hot-loader": "^1.0.1",
@@ -20,6 +21,7 @@
     "eject": "react-app-rewired eject"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
     "eslint": "^5.3.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-plugin-import": "^2.14.0",
