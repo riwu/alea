@@ -29,7 +29,7 @@ router.post('/request', authenticate, async (req, res, next) => {
       subject: `Deloitte: ${displayName} (${email}) requested your feedback!`,
       text: `Please provide your feedback for ${displayName} (${email}) at ${
         process.env.FEEDBACK_URL
-      }`,
+      }?t=1359d714-ee99-4129-be3b-bddf138aa41e`,
     }));
     await Promise.all(promises);
     res.end();

@@ -1,12 +1,16 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { VictoryChart, VictoryLine, VictoryTheme } from 'victory-native';
+import Swiper from 'react-native-swiper';
 import Card from './Card';
 import Title from './Title';
 
 const styles = StyleSheet.create({
   title: {
     marginBottom: 0,
+  },
+  graphContainer: {
+    paddingBottom: 30,
   },
 });
 
@@ -71,25 +75,21 @@ class Graph extends React.Component {
     const { props } = this;
     return (
       <Card style={props.style}>
-        <Title style={styles.title}>{props.data[this.state.index].title}</Title>
-        <VictoryChart theme={VictoryTheme.material} height={200}>
-          <VictoryLine
-            style={{
-              data: { stroke: '#86BC25' },
-            }}
-            data={props.data[this.state.index].values}
-            events={[
-              {
-                target: 'data',
-                eventHandlers: {
-                  onPress: () => this.setState(prevState => ({
-                    index: (prevState.index + 1) % data.length,
-                  })),
-                },
-              },
-            ]}
-          />
-        </VictoryChart>
+        <Swiper loadMinimal height="auto" activeDotColor="#86BC25">
+          {props.data.map(info => (
+            <View key={info.title} style={styles.graphContainer}>
+              <Title style={styles.title}>{info.title}</Title>
+              <VictoryChart theme={VictoryTheme.material} height={200}>
+                <VictoryLine
+                  style={{
+                    data: { stroke: '#86BC25' },
+                  }}
+                  data={info.values}
+                />
+              </VictoryChart>
+            </View>
+          ))}
+        </Swiper>
       </Card>
     );
   }
