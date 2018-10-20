@@ -27,3 +27,4 @@
 - Avoid deleting feedback when team member is deleted
   - `active` column on TeamMember
   - Set `TeamMember_id` FK in `Feedback` table to RESTRICT ON DELETE
+- Handle session expiry for all private API endpoint calls

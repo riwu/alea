@@ -41,7 +41,7 @@ class Feedback extends React.Component {
           const notFound = ((e || {}).response || {}).status === 404;
           notification.error({
             message: notFound ? 'Link is invalid or has been used/expired' : e.message,
-            ...(!notFound && { description: e.response.data }),
+            ...(!notFound && { description: (e.response || {}).data }),
           });
         });
     } else {
@@ -97,7 +97,7 @@ class Feedback extends React.Component {
                     this.setState({ waiting: false });
                     notification.error({
                       message: e.message,
-                      description: e.response.data,
+                      description: (e.response || {}).data,
                     });
                   });
               }}
