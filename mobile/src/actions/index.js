@@ -46,3 +46,8 @@ export const deleteMembers = ids => dispatch => api.deleteMembers(ids.join(','))
   type: types.DELETE_MEMBERS,
   ids,
 }));
+
+export const getFeedback = () => dispatch => api.getFeedback().then(feedback => dispatch({
+  type: types.SET_FEEDBACK,
+  feedback,
+}));

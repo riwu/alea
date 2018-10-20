@@ -8,6 +8,18 @@ import { getFeedbackTokenInfo, postFeedback } from '../actions/api';
 
 notification.config({ duration: 0 });
 
+const allTraits = Object.values(data).reduce((acc, { traits }) => {
+  acc.push(...Object.entries(traits));
+  return acc;
+}, []);
+
+const indexes = new Set();
+while (indexes.size < 6) {
+  indexes.add(Math.floor(Math.random() * allTraits.length));
+}
+
+const randomTraits = [...indexes].map(i => allTraits[i]);
+
 class Feedback extends React.Component {
   selectedTraits = {};
 
@@ -50,19 +62,17 @@ class Feedback extends React.Component {
         <h2>{`Hi ${teamMemberName} (${teamMemberEmail}),`}</h2>
         <h2>{`${requesterName} (${requesterEmail}) has requested your feedback!`}</h2>
         <Spin size="large" spinning={this.state.waiting}>
-          {Object.entries(data[1].traits)
-            .slice(0, 6)
-            .map(([id, trait]) => (
-              <div key={id} className={styles.trait}>
-                <Checkbox
-                  onChange={(e) => {
-                    this.selectedTraits[id] = e.target.checked;
-                  }}
-                >
-                  {trait}
-                </Checkbox>
-              </div>
-            ))}
+          {randomTraits.map(([id, trait]) => (
+            <div key={id} className={styles.trait}>
+              <Checkbox
+                onChange={(e) => {
+                  this.selectedTraits[id] = e.target.checked;
+                }}
+              >
+                {trait}
+              </Checkbox>
+            </div>
+          ))}
           <Input.TextArea
             placeholder="Additional Comments"
             onChange={(e) => {

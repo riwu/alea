@@ -5,3 +5,4 @@ export const MOVE_HACK_TO_END = 'MOVE_HACK_TO_END';
 export const ADD_MEMBER = 'ADD_MEMBER';
 export const SET_MEMBERS = 'SET_MEMBERS';
 export const DELETE_MEMBERS = 'DELETE_MEMBERS';
+export const SET_FEEDBACK = 'SET_FEEDBACK';

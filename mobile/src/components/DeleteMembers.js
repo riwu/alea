@@ -14,7 +14,7 @@ const DeleteMembers = props => (
       .then(() => Alert.alert('Successfully deleted selected members'))
       .catch((e) => {
         if (!handleSessionExpired(e, props)) {
-          Alert.alert('Failed to delete members', e.message);
+          Alert.alert('Failed to delete members', e.response.data);
         }
       })
     }

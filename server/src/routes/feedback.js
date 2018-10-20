@@ -19,6 +19,16 @@ const transporter = nodemailer.createTransport({
   sendingRate: 14,
 });
 
+router.get('/me', authenticate, (req, res, next) => queries
+  .getFeedback(req.user.id)
+  .then(rows => res.send(
+    rows.reduce((acc, { id, ...row }) => {
+      acc[id] = row;
+      return acc;
+    }, {}),
+  ))
+  .catch(next));
+
 router.post('/', (req, res, next) => queries
   .postFeedback(req.query.t, req.body.adaptabilities, req.body.comments)
   .then(() => {

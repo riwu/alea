@@ -1,11 +1,11 @@
-# Setup
+## Setup
 
-## Mobile
+### Mobile
 
 - Create `env.js`
 - `yarn install`
 
-## Server
+### Server
 
 - `yarn install`
 - Set environment variable
@@ -21,3 +21,9 @@
   - `MYSQL_USER`
   - `MYSQL_PORT`
   - `MYSQL_PASSWORD`
+
+## TODO
+
+- Avoid deleting feedback when team member is deleted
+  - `active` column on TeamMember
+  - Set `TeamMember_id` FK in `Feedback` table to RESTRICT ON DELETE

@@ -21,3 +21,4 @@ export const addMember = member => post('users/me/members', member);
 export const getMembers = () => get('users/me/members');
 export const deleteMembers = ids => del(`users/me/members/${ids}`);
 export const requestFeedback = memberIds => post('feedback/request', { memberIds });
+export const getFeedback = () => get('feedback/me');

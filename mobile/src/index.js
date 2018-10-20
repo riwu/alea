@@ -9,7 +9,7 @@ import { persistStore } from 'redux-persist';
 import { Root } from 'native-base';
 import store from './store';
 import Navigator from './navigators';
-import { getHacks, getMembers } from './actions';
+import { getHacks, getMembers, getFeedback } from './actions';
 import splash from '../assets/splash.png';
 
 const persistor = persistStore(store);
@@ -54,6 +54,7 @@ const init = () => {
   checkForUpdates();
   store.dispatch(getHacks());
   store.dispatch(getMembers());
+  store.dispatch(getFeedback());
 };
 
 if (Platform.OS === 'ios') {
