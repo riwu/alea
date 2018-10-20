@@ -21,15 +21,25 @@ const transporter = nodemailer.createTransport({
 
 router.post('/request', authenticate, async (req, res, next) => {
   try {
-    const { displayName, email } = await queries.getDisplayName(req.user.id);
-    console.log('d', displayName, email, process.env.AWS_SES_EMAIL);
-    const promises = req.body.emails.map(toEmail => transporter.sendMail({
+    const { displayName, email } = await queries.getFeedbackRequesterInfo(req.user.id);
+
+    const tokenPromises = Promise.all(
+      req.body.memberIds.map(id => queries.createFeedbackToken(id)),
+    );
+
+    const members = await queries.getMemberEmails(req.user.id, req.body.memberIds);
+    const tokens = (await tokenPromises).reduce((acc, { token, id }) => {
+      acc[id] = token;
+      return acc;
+    }, {});
+
+    const promises = members.map(({ email: toEmail, id }) => transporter.sendMail({
       from: process.env.AWS_SES_EMAIL,
       to: toEmail,
       subject: `Deloitte: ${displayName} (${email}) requested your feedback!`,
       text: `Please provide your feedback for ${displayName} (${email}) at ${
         process.env.FEEDBACK_URL
-      }?t=1359d714-ee99-4129-be3b-bddf138aa41e`,
+      }?t=${tokens[id]}`,
     }));
     await Promise.all(promises);
     res.end();

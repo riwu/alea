@@ -62,37 +62,28 @@ const data = [
   },
 ];
 
-class Graph extends React.Component {
-  static defaultProps = {
-    data,
-  };
+const Graph = props => (
+  <Card style={props.style}>
+    <Swiper loadMinimal height="auto" activeDotColor="#86BC25">
+      {props.data.map(info => (
+        <View key={info.title} style={styles.graphContainer}>
+          <Title style={styles.title}>{info.title}</Title>
+          <VictoryChart theme={VictoryTheme.material} height={200}>
+            <VictoryLine
+              style={{
+                data: { stroke: '#86BC25' },
+              }}
+              data={info.values}
+            />
+          </VictoryChart>
+        </View>
+      ))}
+    </Swiper>
+  </Card>
+);
 
-  state = {
-    index: 0,
-  };
-
-  render() {
-    const { props } = this;
-    return (
-      <Card style={props.style}>
-        <Swiper loadMinimal height="auto" activeDotColor="#86BC25">
-          {props.data.map(info => (
-            <View key={info.title} style={styles.graphContainer}>
-              <Title style={styles.title}>{info.title}</Title>
-              <VictoryChart theme={VictoryTheme.material} height={200}>
-                <VictoryLine
-                  style={{
-                    data: { stroke: '#86BC25' },
-                  }}
-                  data={info.values}
-                />
-              </VictoryChart>
-            </View>
-          ))}
-        </Swiper>
-      </Card>
-    );
-  }
-}
+Graph.defaultProps = {
+  data,
+};
 
 export default Graph;

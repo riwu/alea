@@ -23,7 +23,13 @@ module.exports = {
     adaptabilities: JSON.parse((rows[0] || {}).adaptabilities || null),
   })),
 
-  getDisplayName: userId => conn.query('SELECT displayName, email FROM User WHERE id = ?', userId).then(rows => rows[0]),
+  getFeedbackRequesterInfo: userId => conn.query('SELECT displayName, email FROM User WHERE id = ?', userId).then(rows => rows[0]),
+  createFeedbackToken: memberId => conn
+    .query('INSERT INTO FeedbackToken SET TeamMember_id = ?', memberId)
+    .then(({ insertId }) => conn.query('SELECT token, TeamMember_id AS id FROM FeedbackToken WHERE id = ?', insertId))
+    .then(rows => rows[0]),
+
+  getMemberEmails: (userId, ids) => conn.query('SELECT id, email FROM TeamMember WHERE User_id = ? AND id IN (?)', [userId, ids]),
 
   getHacks: () => conn.query('SELECT text, categories FROM Hack').then(rows => rows.map(row => ({
     ...row,

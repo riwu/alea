@@ -68,7 +68,7 @@ class RequestFeedback extends React.Component {
             disabled: selectedIds.length === 0 || this.state.isWaiting,
             onPress: () => {
               this.setState({ isWaiting: true });
-              requestFeedback(selectedIds.map(id => props.members[id].email))
+              requestFeedback(selectedIds)
                 .then(() => {
                   Toast.show({
                     text: `Feedback request sent to ${selectedIds
