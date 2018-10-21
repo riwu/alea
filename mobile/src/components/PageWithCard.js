@@ -6,9 +6,10 @@ import Page from './Page';
 
 const styles = StyleSheet.create({
   card: {
-    width: WIDTH - 40,
-    margin: 20,
-    padding: 25,
+    width: WIDTH - 20,
+    marginHorizontal: 10,
+    marginVertical: 15,
+    padding: 20,
     flex: 1,
   },
 });

@@ -17,11 +17,7 @@
       "checkAutomatically": "ON_ERROR_RECOVERY",
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*",
-      "node_modules/@expo/vector-icons/fonts/*.ttf",
-      "node_modules/react-navigation/src/**/*.png"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "riwu.alea",

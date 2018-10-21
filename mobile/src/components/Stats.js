@@ -41,23 +41,25 @@ const Stats = props => (
         value: 24,
         up: false,
         backgroundColor: '#43B02A',
+        valueColor: '#DA291C',
       },
       {
         title: 'Feedbacks Received',
         value: 47,
         up: true,
         backgroundColor: '#046A38',
-        textColor: 'white',
+        titleColor: 'white',
+        valueColor: 'white',
       },
     ].map(info => (
       <Card key={info.title} style={[styles.stat, { backgroundColor: info.backgroundColor }]}>
-        <Text style={{ color: info.textColor }}>{info.title}</Text>
+        <Text style={{ color: info.titleColor }}>{info.title}</Text>
         <View style={styles.statValueContainer}>
           <MaterialCommunityIcons
-            style={[styles.arrow, { color: info.textColor }]}
+            style={[styles.arrow, { color: info.valueColor }]}
             name={info.up ? 'arrow-up' : 'arrow-down'}
           />
-          <Text style={[styles.statValue, { color: info.textColor }]}>{info.value}</Text>
+          <Text style={[styles.statValue, { color: info.valueColor }]}>{info.value}</Text>
         </View>
       </Card>
     ))}

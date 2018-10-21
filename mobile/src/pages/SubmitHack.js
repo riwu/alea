@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, TextInput, Alert } from 'react-native';
+import { Textarea } from 'native-base';
 import { submitHack } from '../actions';
 import Title from '../components/Title';
 import Adaptabilities from '../components/Adaptabilities';
@@ -9,12 +10,8 @@ import handleSessionExpired from '../util/handleSessionExpired';
 
 const styles = StyleSheet.create({
   input: {
-    height: 200,
-    borderWidth: 1,
     borderRadius: 2,
-    borderColor: '#D0D0CE',
     marginTop: 20,
-    padding: 10,
   },
 });
 
@@ -64,8 +61,9 @@ class SubmitHack extends React.Component {
           }
           isSelected={id => this.state.selected[id]}
         />
-        <TextInput
-          multiline
+        <Textarea
+          rowSpan={5}
+          bordered
           style={styles.input}
           placeholder="Enter your hack"
           onChangeText={text => this.setState({ text })}

@@ -12,7 +12,16 @@ import Navigator from './navigators';
 import { getHacks, getMembers, getFeedback } from './actions';
 import splash from '../assets/splash.png';
 
-const persistor = persistStore(store);
+const fetchData = () => {
+  // is logged in
+  if (store.getState().user.email) {
+    store.dispatch(getHacks());
+    store.dispatch(getMembers());
+    store.dispatch(getFeedback());
+  }
+};
+
+const persistor = persistStore(store, null, fetchData);
 // persistor.purge();
 
 const styles = StyleSheet.create({
@@ -50,21 +59,15 @@ const checkForUpdates = async () => {
   );
 };
 
-const init = () => {
-  checkForUpdates();
-  store.dispatch(getHacks());
-  store.dispatch(getMembers());
-  store.dispatch(getFeedback());
-};
-
 if (Platform.OS === 'ios') {
-  init(); // AppState change event not called for initial load on iOS
+  checkForUpdates(); // AppState change event not called for initial load on iOS
 }
 
 AppState.addEventListener('change', async (newState) => {
   console.log('new state', newState);
   if (newState === 'active') {
-    init();
+    checkForUpdates();
+    fetchData();
   }
 });
 
