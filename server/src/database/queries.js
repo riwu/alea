@@ -75,4 +75,11 @@ module.exports = {
   addTeamMember: (userId, member) => conn.query('INSERT INTO TeamMember SET ?', { ...member, User_id: userId }),
   getTeamMembers: userId => conn.query('SELECT id, name, email FROM TeamMember WHERE User_id = ?', userId),
   deleteTeamMembers: (userId, memberIds) => conn.query('DELETE FROM TeamMember WHERE User_id = ? AND id IN (?)', [userId, memberIds]),
+  getScores: () => conn.query(
+    `SELECT User.id, COALESCE(JSON_LENGTH(User.adaptabilities), 0) + COALESCE(SUM(JSON_LENGTH(Feedback.adaptabilities)), 0) AS score 
+     FROM User 
+     JOIN TeamMember ON User.id = TeamMember.User_id
+     JOIN Feedback ON TeamMember.id = Feedback.TeamMember_id 
+     GROUP BY User.id`,
+  ),
 };

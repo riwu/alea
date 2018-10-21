@@ -9,15 +9,13 @@ import { persistStore } from 'redux-persist';
 import { Root } from 'native-base';
 import store from './store';
 import Navigator from './navigators';
-import { getHacks, getMembers, getFeedback } from './actions';
 import splash from '../assets/splash.png';
+import getUserInfo from './util/getUserInfo';
 
 const fetchData = () => {
   // is logged in
   if (store.getState().user.email) {
-    store.dispatch(getHacks());
-    store.dispatch(getMembers());
-    store.dispatch(getFeedback());
+    store.dispatch(getUserInfo());
   }
 };
 

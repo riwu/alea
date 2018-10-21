@@ -1,5 +1,6 @@
 import * as api from './api';
 import * as types from './types';
+import getUserInfo from '../util/getUserInfo';
 
 export const setUser = (user) => {
   const { password, ...rest } = user;
@@ -16,7 +17,7 @@ export const getMembers = () => dispatch => api.getMembers().then(members => dis
 
 export const register = user => dispatch => api.register(user).then(({ id }) => dispatch(setUser({ ...user, id })));
 export const login = user => dispatch => api.login(user).then((userInfo) => {
-  dispatch(getMembers());
+  dispatch(getUserInfo());
   return dispatch(setUser({ ...user, ...userInfo }));
 });
 
@@ -54,4 +55,9 @@ export const deleteMembers = ids => dispatch => api.deleteMembers(ids.join(','))
 export const getFeedback = () => dispatch => api.getFeedback().then(feedback => dispatch({
   type: types.SET_FEEDBACK,
   feedback,
+}));
+
+export const getRank = () => dispatch => api.getRank().then(rank => dispatch({
+  type: types.SET_RANK,
+  rank,
 }));

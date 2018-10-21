@@ -33,7 +33,7 @@ const Stats = props => (
     {[
       {
         title: 'Current Leaderboard Ranking',
-        value: 12,
+        value: props.rank.adaptability,
         up: true,
         backgroundColor: '#C4D600',
       },
@@ -74,5 +74,6 @@ export default connect(state => ({
   userId: state.user.id,
   feedback: state.feedback,
   hacks: state.hacks,
+  rank: state.rank,
   adaptabilities: state.user.adaptabilities,
 }))(Stats);

@@ -21,6 +21,7 @@ app.use('/users', require('./routes/users'));
 app.use('/sessions', require('./routes/sessions'));
 app.use('/hacks', require('./routes/hacks'));
 app.use('/feedback', require('./routes/feedback'));
+app.use('/rank', require('./routes/rank'));
 
 app.use(require('./middleware/errorHandler'));
 

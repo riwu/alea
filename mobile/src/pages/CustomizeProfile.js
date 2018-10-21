@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Alert } from 'react-native';
-import { updateUser } from '../actions';
+import { updateUser, getRank } from '../actions';
 import data from './data';
 import PageWithCard from '../components/PageWithCard';
 import AdaptabilitiesSelection from '../components/AdaptabilitiesSelection';
@@ -38,7 +38,10 @@ class CustomizeProfile extends React.Component {
                     .filter(([, isSelected]) => isSelected)
                     .map(([id]) => Number(id)),
                 })
-                .then(() => props.navigation.navigate('Profile'))
+                .then(() => {
+                  props.navigation.navigate('Profile');
+                  props.getRank();
+                })
                 .catch((e) => {
                   if (!handleSessionExpired(e, props)) {
                     Alert.alert(
@@ -66,5 +69,5 @@ class CustomizeProfile extends React.Component {
 }
 export default connect(
   null,
-  { updateUser },
+  { updateUser, getRank },
 )(CustomizeProfile);

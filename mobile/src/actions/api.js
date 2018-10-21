@@ -23,3 +23,4 @@ export const deleteMembers = ids => del(`users/me/members/${ids}`);
 export const requestFeedback = memberIds => post('feedback/request', { memberIds });
 export const getFeedback = () => get('feedback/me');
 export const sendFeedback = info => post('feedback/others', info);
+export const getRank = () => get('rank');
