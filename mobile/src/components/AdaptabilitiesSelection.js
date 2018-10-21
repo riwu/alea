@@ -35,7 +35,7 @@ const LinearGradientView = props => (
 
 const AdaptabilitiesSelection = props => (
   <React.Fragment>
-    <Title>{dataArr[props.index][1].title}</Title>
+    {props.showTitle && <Title>{dataArr[props.index][1].title}</Title>}
     <FlatList
       numColumns={2}
       keyExtractor={([id]) => id}

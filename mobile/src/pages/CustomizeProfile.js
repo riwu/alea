@@ -52,6 +52,7 @@ class CustomizeProfile extends React.Component {
         }}
       >
         <AdaptabilitiesSelection
+          showTitle
           index={this.state.index}
           selected={this.state.selected}
           onSelect={id => this.setState(prevState => ({
