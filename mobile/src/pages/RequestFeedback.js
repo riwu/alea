@@ -5,6 +5,7 @@ import { Toast } from 'native-base';
 import { requestFeedback } from '../actions/api';
 import Feedback from '../components/Feedback';
 import Spinner from '../components/Spinner';
+import handleSessionExpired from '../util/handleSessionExpired';
 
 class RequestFeedback extends React.Component {
   state = {
@@ -33,8 +34,10 @@ class RequestFeedback extends React.Component {
               props.navigation.pop();
             })
             .catch((e) => {
-              this.setState({ isWaiting: false });
-              Alert.alert('Feedback request failed', e.message);
+              if (!handleSessionExpired(e, props)) {
+                Alert.alert('Feedback request failed', e.message);
+                this.setState({ isWaiting: false });
+              }
             });
         }}
       >

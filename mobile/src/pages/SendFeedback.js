@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Alert } from 'react-native';
 import { Textarea, Toast } from 'native-base';
 import { sendFeedback } from '../actions/api';
 import data from './data';
 import PageWithCard from '../components/PageWithCard';
 import AdaptabilitiesSelection from '../components/AdaptabilitiesSelection';
-import handleError from '../util/handleError';
 import Spinner from '../components/Spinner';
+import handleSessionExpired from '../util/handleSessionExpired';
 
 const allTraits = Object.values(data).reduce((acc, { traits }) => {
   acc.push(...Object.entries(traits));
@@ -77,8 +77,10 @@ class SendFeedback extends React.Component {
                 });
               })
               .catch((e) => {
-                this.setState({ isWaiting: false });
-                handleError(e);
+                if (!handleSessionExpired(e, props)) {
+                  Alert.alert('Failed to send feedback', e.message);
+                  this.setState({ isWaiting: false });
+                }
               });
           },
         }}
