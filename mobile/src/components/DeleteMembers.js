@@ -1,15 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Alert } from 'react-native';
+import { StyleSheet, Alert } from 'react-native';
 import { Toast } from 'native-base';
-import Button from './Button';
+import ButtonComponent from './Button';
 import { deleteMembers } from '../actions';
 import handleSessionExpired from '../util/handleSessionExpired';
 
+const styles = StyleSheet.create({
+  delete: {
+    backgroundColor: 'red',
+  },
+});
+
 const DeleteMembers = props => (
-  <Button
+  <ButtonComponent
     title="Delete Selected"
-    style={props.style}
+    style={[styles.delete, props.style]}
     onPress={() => props
       .deleteMembers(props.ids)
       .then(() => Toast.show({

@@ -1,13 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, View } from 'react-native';
-import { VictoryChart, VictoryLine, VictoryTheme } from 'victory-native';
+import { StyleSheet } from 'react-native';
+import {
+  VictoryChart, VictoryLine, VictoryTheme, VictoryAxis,
+} from 'victory-native';
 import Swiper from 'react-native-swiper';
 import subMonths from 'date-fns/sub_months';
 import format from 'date-fns/format';
 import Card from './Card';
 import Title from './Title';
 import data from '../pages/data';
+import { WIDTH } from '../constants';
 
 const dataMap = Object.entries(data).reduce((acc, [id, { traits }]) => {
   Object.keys(traits).forEach((traitId) => {
@@ -18,10 +21,7 @@ const dataMap = Object.entries(data).reduce((acc, [id, { traits }]) => {
 
 const styles = StyleSheet.create({
   title: {
-    marginBottom: 0,
-  },
-  graphContainer: {
-    paddingBottom: 30,
+    paddingBottom: 0,
   },
 });
 
@@ -74,35 +74,45 @@ const Graph = (props) => {
   }, {});
 
   return (
-    <Card style={props.style}>
-      <Swiper loadMinimal height="auto" activeDotColor="#86BC25">
-        {graphData.map(info => (
-          <View key={info.id} style={styles.graphContainer}>
-            <Title style={styles.title}>{info.title}</Title>
-            <VictoryChart theme={VictoryTheme.material} height={200}>
-              <VictoryLine
-                style={{
-                  data: { stroke: '#86BC25' },
-                }}
-                data={info.values
-                  .map((value, i) => ({
-                    x: subMonths(date, info.values.length - i),
-                    y: value,
-                  }))
-                  .concat({
-                    x: date,
-                    y: score[info.id],
-                  })
-                  .map(value => ({
-                    x: format(value.x, 'MMM YY'),
-                    y: value.y,
-                  }))}
-              />
-            </VictoryChart>
-          </View>
-        ))}
-      </Swiper>
-    </Card>
+    <Swiper loadMinimal height="auto" activeDotColor="#86BC25">
+      {graphData.map(info => (
+        <Card key={info.id}>
+          <Title style={styles.title}>{info.title}</Title>
+          <VictoryChart
+            theme={VictoryTheme.material}
+            height={200}
+            width={WIDTH - 40}
+            padding={{
+              top: 10,
+              bottom: 65,
+              left: 35,
+              right: 30,
+            }}
+          >
+            <VictoryLine
+              style={{
+                data: { stroke: '#86BC25' },
+              }}
+              data={info.values
+                .map((value, i) => ({
+                  x: subMonths(date, info.values.length - i),
+                  y: value,
+                }))
+                .concat({
+                  x: date,
+                  y: score[info.id],
+                })
+                .map(value => ({
+                  x: format(value.x, 'MMM YY'),
+                  y: value.y,
+                }))}
+            />
+            <VictoryAxis tickFormat={value => value} />
+            <VictoryAxis tickFormat={value => value} dependentAxis />
+          </VictoryChart>
+        </Card>
+      ))}
+    </Swiper>
   );
 };
 

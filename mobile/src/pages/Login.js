@@ -7,7 +7,7 @@ import { login } from '../actions';
 const Login = props => (
   <Authentication
     prefix="Sign in to your"
-    title="Hogan Report"
+    title="Account"
     onSubmit={data => props
       .login(data)
       .then(action => props.navigation.navigate(action.user.adaptabilities ? 'Profile' : 'CustomizeProfile')) // if not yet customize profile

@@ -28,3 +28,4 @@
   - `active` column on TeamMember
   - Set `TeamMember_id` FK in `Feedback` table to RESTRICT ON DELETE
 - Handle session expiry for all private API endpoint calls
+- Make changes in https://github.com/leecade/react-native-swiper/pull/779

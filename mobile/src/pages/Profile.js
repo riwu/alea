@@ -9,13 +9,13 @@ import Graph from '../components/Graph';
 
 const styles = StyleSheet.create({
   container: {
-    // margin: 20,
+    padding: 20,
   },
   stats: {
     marginVertical: 30,
   },
   submitButton: {
-    marginVertical: 20,
+    marginTop: 20,
     backgroundColor: 'rgba(134, 188, 37, 0.25)',
   },
   submitText: {
