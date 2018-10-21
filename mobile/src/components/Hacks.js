@@ -44,7 +44,7 @@ class Hacks extends React.Component {
           isSelected={id => this.state.selected === id}
         />
         <View style={styles.hacks}>
-          {(props.hacks[this.state.selected] || []).slice(0, 4).map(hack => (
+          {(props.hacks[this.state.selected] || []).slice(0, 4).map((hack, index) => (
             <LinearGradient
               colors={['#046A38', '#62B5E5']}
               start={[0, 0]}
@@ -53,7 +53,7 @@ class Hacks extends React.Component {
             >
               <MaterialCommunityIcons
                 name="close"
-                onPress={() => props.moveHackToEnd(this.state.selected)}
+                onPress={() => props.moveHackToEnd(this.state.selected, index)}
                 style={styles.close}
               />
               <Text style={styles.text}>{hack}</Text>

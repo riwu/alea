@@ -31,9 +31,10 @@ export const submitHack = hack => dispatch => api.submitHack(hack).then(() => di
   ...hack,
 }));
 
-export const moveHackToEnd = category => ({
+export const moveHackToEnd = (category, index) => ({
   type: types.MOVE_HACK_TO_END,
   category,
+  index,
 });
 
 export const addMember = member => dispatch => api.addMember(member).then(({ id }) => dispatch({
