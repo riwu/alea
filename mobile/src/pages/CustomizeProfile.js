@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Alert } from 'react-native';
 import { updateUser } from '../actions';
-import Title from '../components/Title';
 import data from './data';
 import PageWithCard from '../components/PageWithCard';
 import AdaptabilitiesSelection from '../components/AdaptabilitiesSelection';
@@ -52,9 +51,8 @@ class CustomizeProfile extends React.Component {
           },
         }}
       >
-        <Title>{dataArr[this.state.index][1].title}</Title>
         <AdaptabilitiesSelection
-          data={Object.entries(dataArr[this.state.index][1].traits)}
+          index={this.state.index}
           selected={this.state.selected}
           onSelect={id => this.setState(prevState => ({
             selected: { ...prevState.selected, [id]: !prevState.selected[id] },
