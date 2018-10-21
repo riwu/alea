@@ -5,7 +5,7 @@ export const NameInput = props => (
   <TextInput
     onChangeText={displayName => props.onChangeText(displayName)}
     autoCapitalize="words"
-    maxLength={20}
+    maxLength={25}
     autoCorrect={false}
     placeholder="Name"
     textContentType="name"
@@ -17,7 +17,7 @@ export const EmailInput = props => (
     onChangeText={email => props.onChangeText(email)}
     autoCorrect={false}
     autoCapitalize="none"
-    maxLength={30}
+    maxLength={40}
     placeholder="Email"
     textContentType="emailAddress"
     keyboardType="email-address"

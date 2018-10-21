@@ -25,6 +25,9 @@ const styles = StyleSheet.create({
   delete: {
     alignSelf: 'flex-end',
   },
+  item: {
+    paddingLeft: 0,
+  },
 });
 
 class Feedback extends React.Component {
@@ -61,7 +64,7 @@ class Feedback extends React.Component {
             data={Object.entries(props.members)}
             keyExtractor={([id]) => id}
             renderItem={({ item: [id, member] }) => (
-              <ListItem icon>
+              <ListItem noIndent icon style={styles.item}>
                 <Left>
                   <Icon name="ios-contact" style={styles.icon} />
                 </Left>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, TextInput, Alert } from 'react-native';
-import { Textarea } from 'native-base';
+import { StyleSheet, Alert } from 'react-native';
+import { Textarea, Toast } from 'native-base';
 import { submitHack } from '../actions';
 import Title from '../components/Title';
 import Adaptabilities from '../components/Adaptabilities';
@@ -40,9 +40,14 @@ class SubmitHack extends React.Component {
                 text: trimmedText,
                 categories: selected.map(([id]) => Number(id)),
               })
-              .then(() => Alert.alert('Successfully submitted hack', 'Thank you for your contribution!', [
-                { text: 'Done', onPress: () => props.navigation.pop() },
-              ]))
+              .then(() => {
+                Toast.show({
+                  text: 'Successfully submitted hack!',
+                  type: 'success',
+                  duration: 3000,
+                });
+                props.navigation.pop();
+              })
               .catch((e) => {
                 if (!handleSessionExpired(e, props)) {
                   Alert.alert('Failed to submit hack', 'Please check your Internet connection.');

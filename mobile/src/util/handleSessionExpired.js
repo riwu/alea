@@ -1,10 +1,14 @@
-import { Alert } from 'react-native';
+import { Toast } from 'native-base';
 
 const handleSessionExpired = (e, props) => {
   if (((e || {}).response || {}).status !== 401) {
     return false;
   }
-  Alert.alert('Session expired', 'Please re-login');
+  Toast.show({
+    text: 'Session expired, Please re-login',
+    type: 'warning',
+    duration: 4000,
+  });
   props.navigation.navigate('Login');
   return true;
 };

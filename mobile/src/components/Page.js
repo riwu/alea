@@ -33,7 +33,7 @@ const Page = (props) => {
   const Component = props.keyboardAvoidingView ? KeyboardAvoidingView : View;
   const buttons = props.buttons || [props.button];
   return (
-    <Background>
+    <Background ratio={props.ratio}>
       <Component
         behavior="position"
         contentContainerStyle={styles.container}

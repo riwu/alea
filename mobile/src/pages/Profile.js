@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, ScrollView, View } from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import Button from '../components/Button';
 import Page from '../components/Page';
@@ -8,11 +8,11 @@ import Hacks from '../components/Hacks';
 import Graph from '../components/Graph';
 
 const styles = StyleSheet.create({
-  graph: {
-    marginTop: 20,
+  container: {
+    // margin: 20,
   },
   stats: {
-    marginVertical: 20,
+    marginVertical: 30,
   },
   submitButton: {
     marginVertical: 20,
@@ -21,13 +21,11 @@ const styles = StyleSheet.create({
   submitText: {
     color: '#86BC25',
   },
-  hacks: {
-    backgroundColor: 'black',
-  },
 });
 
 const Profile = props => (
   <Page
+    ratio={1}
     prefix={`${props.displayName}'s`}
     title="Profile"
     buttons={[
@@ -41,18 +39,16 @@ const Profile = props => (
       },
     ]}
   >
-    <ScrollView>
-      <Graph style={styles.graph} />
+    <ScrollView contentContainerStyle={styles.container}>
+      <Graph />
       <Stats style={styles.stats} />
-      <View style={styles.hacks}>
-        <Hacks />
-        <Button
-          style={styles.submitButton}
-          textStyle={styles.submitText}
-          title="SUBMIT A HACK"
-          onPress={() => props.navigation.navigate('SubmitHack')}
-        />
-      </View>
+      <Hacks />
+      <Button
+        style={styles.submitButton}
+        textStyle={styles.submitText}
+        title="SUBMIT A HACK"
+        onPress={() => props.navigation.navigate('SubmitHack')}
+      />
     </ScrollView>
   </Page>
 );

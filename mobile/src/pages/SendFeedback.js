@@ -1,14 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  StyleSheet, View, Text, TouchableOpacity, FlatList,
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Textarea, Toast } from 'native-base';
-import { LinearGradient } from 'expo';
 import { sendFeedback } from '../actions/api';
 import data from './data';
-import { WIDTH } from '../constants';
 import PageWithCard from '../components/PageWithCard';
+import AdaptabilitiesSelection from '../components/AdaptabilitiesSelection';
 import handleError from '../util/handleError';
 import Spinner from '../components/Spinner';
 
@@ -27,28 +24,10 @@ const getRandomTraits = () => {
 };
 
 const styles = StyleSheet.create({
-  traitContainer: {
-    width: WIDTH / 2 - 55,
-    margin: 5,
-    padding: 10,
-
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: 'lightgray',
-    overflow: 'hidden',
-
-    flexGrow: 1,
-  },
-  traitTextStyle: {
-    fontSize: 16,
+  comments: {
+    marginTop: 15,
   },
 });
-
-const LinearGradientView = props => (
-  <LinearGradient colors={['#86BC25', '#C4D600']} style={props.style}>
-    {props.children}
-  </LinearGradient>
-);
 
 class SendFeedback extends React.Component {
   state = {
@@ -105,27 +84,16 @@ class SendFeedback extends React.Component {
         }}
       >
         <Spinner animating={this.state.isWaiting} />
-        <FlatList
-          numColumns={2}
-          keyExtractor={([id]) => id}
+        <AdaptabilitiesSelection
           data={this.state.data}
-          renderItem={({ item: [id, trait] }) => {
-            const Component = this.state.selected[id] ? LinearGradientView : View;
-            return (
-              <TouchableOpacity
-                onPress={() => this.setState(prevState => ({
-                  selected: { ...prevState.selected, [id]: !prevState.selected[id] },
-                }))
-                }
-              >
-                <Component style={styles.traitContainer}>
-                  <Text style={styles.traitTextStyle}>{trait}</Text>
-                </Component>
-              </TouchableOpacity>
-            );
-          }}
+          selected={this.state.selected}
+          onSelect={id => this.setState(prevState => ({
+            selected: { ...prevState.selected, [id]: !prevState.selected[id] },
+          }))
+          }
           ListFooterComponent={(
             <Textarea
+              style={styles.comments}
               onChangeText={(text) => {
                 this.comments = text;
               }}

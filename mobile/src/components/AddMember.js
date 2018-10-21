@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
   modalView: {
     backgroundColor: 'white',
     padding: 20,
+    borderRadius: 10,
   },
   cancel: {
     backgroundColor: 'white',
@@ -34,9 +35,9 @@ class AddMember extends React.Component {
     email: '',
   };
 
-  toggleModal = () => {
-    this.setState(prevState => ({ modalVisible: !prevState.modalVisible }));
-  };
+  toggleModal(callback) {
+    this.setState(prevState => ({ modalVisible: !prevState.modalVisible }), callback);
+  }
 
   render() {
     const { props } = this;
@@ -50,7 +51,7 @@ class AddMember extends React.Component {
             </Form>
             <View style={styles.buttons}>
               <Button
-                onPress={this.toggleModal}
+                onPress={() => this.toggleModal()}
                 title="Cancel"
                 style={styles.cancel}
                 textStyle={styles.cancelText}
@@ -83,7 +84,7 @@ class AddMember extends React.Component {
             </View>
           </View>
         </Modal>
-        <Button onPress={this.toggleModal} style={props.style} title="Add new" />
+        <Button onPress={() => this.toggleModal()} style={props.style} title="Add new" />
       </React.Fragment>
     );
   }

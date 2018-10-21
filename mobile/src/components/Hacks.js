@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
+    paddingTop: 10,
   },
   hack: {
     width: '45%',
@@ -44,7 +45,12 @@ class Hacks extends React.Component {
         />
         <View style={styles.hacks}>
           {(props.hacks[this.state.selected] || []).slice(0, 4).map(hack => (
-            <LinearGradient colors={['#046A38', '#62B5E5']} key={hack} style={styles.hack}>
+            <LinearGradient
+              colors={['#046A38', '#62B5E5']}
+              start={[0, 0]}
+              key={hack}
+              style={styles.hack}
+            >
               <MaterialCommunityIcons
                 name="close"
                 onPress={() => props.moveHackToEnd(this.state.selected)}
