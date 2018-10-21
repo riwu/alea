@@ -78,8 +78,8 @@ module.exports = {
   getScores: () => conn.query(
     `SELECT User.id, COALESCE(JSON_LENGTH(User.adaptabilities), 0) + COALESCE(SUM(JSON_LENGTH(Feedback.adaptabilities)), 0) AS score 
      FROM User 
-     JOIN TeamMember ON User.id = TeamMember.User_id
-     JOIN Feedback ON TeamMember.id = Feedback.TeamMember_id 
+     LEFT JOIN TeamMember ON User.id = TeamMember.User_id
+     LEFT JOIN Feedback ON TeamMember.id = Feedback.TeamMember_id 
      GROUP BY User.id`,
   ),
 };
