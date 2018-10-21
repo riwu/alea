@@ -14,7 +14,7 @@ export const getMembers = () => dispatch => api.getMembers().then(members => dis
   members,
 }));
 
-export const register = user => dispatch => api.register(user).then(() => dispatch(setUser(user)));
+export const register = user => dispatch => api.register(user).then(({ id }) => dispatch(setUser({ ...user, id })));
 export const login = user => dispatch => api.login(user).then((userInfo) => {
   dispatch(getMembers());
   return dispatch(setUser({ ...user, ...userInfo }));
@@ -26,9 +26,12 @@ export const getHacks = () => dispatch => api.getHacks().then(hacks => dispatch(
   type: types.SET_HACKS,
   hacks,
 }));
-export const submitHack = hack => dispatch => api.submitHack(hack).then(() => dispatch({
+
+export const submitHack = hack => (dispatch, getState) => api.submitHack(hack).then(({ id }) => dispatch({
   type: types.SUBMIT_HACK,
+  id,
   ...hack,
+  userId: getState().user.id,
 }));
 
 export const moveHackToEnd = (category, index) => ({

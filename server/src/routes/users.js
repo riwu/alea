@@ -17,7 +17,7 @@ router.post('/', (req, res, next) => {
         if (err) {
           return next(err);
         }
-        return res.end();
+        return res.send({ id });
       });
     })
     .catch((e) => {

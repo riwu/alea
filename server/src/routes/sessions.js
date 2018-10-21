@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post('/', passport.authenticate('local'), (req, res, next) => queries
   .getUserInfo(req.user.id)
-  .then(user => res.send(user))
+  .then(user => res.send({ ...user, id: req.user.id }))
   .catch(next));
 
 module.exports = router;

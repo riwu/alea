@@ -62,7 +62,7 @@ module.exports = {
 
   deleteFeedbackToken: token => conn.query('DELETE FROM FeedbackToken WHERE token = ?', token),
 
-  getHacks: () => conn.query('SELECT text, categories FROM Hack').then(rows => rows.map(row => ({
+  getHacks: () => conn.query('SELECT id, text, categories, User_id AS userId FROM Hack').then(rows => rows.map(row => ({
     ...row,
     categories: JSON.parse(row.categories),
   }))),

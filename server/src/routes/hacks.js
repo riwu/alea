@@ -7,12 +7,10 @@ const router = express.Router();
 router.get('/', (req, res, next) => queries
   .getHacks()
   .then(rows => res.send(
-    rows.reduce((acc, row) => {
-      row.categories.forEach((category) => {
-        if (!acc[category]) {
-          acc[category] = [];
-        }
-        acc[category].push(row.text);
+    rows.reduce((acc, { categories, ...row }) => {
+      categories.forEach((category) => {
+        acc[category] = acc[category] || [];
+        acc[category].push(row);
       });
       return acc;
     }, {}),
@@ -21,7 +19,7 @@ router.get('/', (req, res, next) => queries
 
 router.post('/', authenticate, (req, res, next) => queries
   .submitHack(req.user.id, req.body)
-  .then(() => res.end())
+  .then(({ insertId }) => res.send({ id: insertId }))
   .catch(next));
 
 module.exports = router;

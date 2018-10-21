@@ -4,19 +4,26 @@ const hacks = (state = {}, action) => {
   switch (action.type) {
     case SET_HACKS:
       return action.hacks;
-    case SUBMIT_HACK:
+    case SUBMIT_HACK: {
+      const { type, categories, ...data } = action;
       return {
         ...state,
-        ...action.categories.reduce((acc, category) => {
-          acc[category] = [action.text].concat(state[category] || []);
+        ...categories.reduce((acc, category) => {
+          acc[category] = [data].concat(state[category] || []);
           return acc;
         }, {}),
       };
-    case MOVE_HACK_TO_END:
+    }
+    case MOVE_HACK_TO_END: {
+      const data = state[action.category];
       return {
         ...state,
-        [action.category]: state[action.category].slice(1).concat(state[action.category][0]),
+        [action.category]: data
+          .slice(0, action.index)
+          .concat(data.slice(action.index + 1))
+          .concat(data[action.index]),
       };
+    }
     default:
       return state;
   }

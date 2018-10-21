@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { StyleSheet, View, Text } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Card from './Card';
@@ -38,14 +39,17 @@ const Stats = props => (
       },
       {
         title: 'Hacks Done',
-        value: 24,
+        value: Object.values(props.hacks).reduce(
+          (acc, hacks) => acc + hacks.filter(hack => hack.userId === props.userId).length,
+          0,
+        ),
         up: false,
         backgroundColor: '#43B02A',
         valueColor: '#DA291C',
       },
       {
         title: 'Feedbacks Received',
-        value: 47,
+        value: Object.keys(props.feedback).length,
         up: true,
         backgroundColor: '#046A38',
         titleColor: 'white',
@@ -66,4 +70,9 @@ const Stats = props => (
   </View>
 );
 
-export default Stats;
+export default connect(state => ({
+  userId: state.user.id,
+  feedback: state.feedback,
+  hacks: state.hacks,
+  adaptabilities: state.user.adaptabilities,
+}))(Stats);

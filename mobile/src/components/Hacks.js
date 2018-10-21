@@ -48,7 +48,7 @@ class Hacks extends React.Component {
             <LinearGradient
               colors={['#046A38', '#62B5E5']}
               start={[0, 0]}
-              key={hack}
+              key={hack.id}
               style={styles.hack}
             >
               <MaterialCommunityIcons
@@ -56,7 +56,7 @@ class Hacks extends React.Component {
                 onPress={() => props.moveHackToEnd(this.state.selected, index)}
                 style={styles.close}
               />
-              <Text style={styles.text}>{hack}</Text>
+              <Text style={styles.text}>{hack.text}</Text>
             </LinearGradient>
           ))}
         </View>
