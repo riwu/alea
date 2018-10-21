@@ -45,7 +45,7 @@ class Feedback extends React.Component {
         {props.children}
         <PageWithCard
           prefix={props.prefix}
-          title="Feedback"
+          title="Insight"
           button={{
             title: props.buttonTitle,
             disabled: selectedIds.length === 0 || props.disabled,

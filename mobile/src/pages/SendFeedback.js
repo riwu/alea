@@ -72,14 +72,14 @@ class SendFeedback extends React.Component {
                       props.navigation.pop();
                     }
                     Toast.show({
-                      text: `Feedback sent to ${member.name}`,
+                      text: `Insight sent to ${member.name}`,
                       type: 'success',
                       duration: 2000,
                     });
                   })
                   .catch((e) => {
                     if (!handleSessionExpired(e, props)) {
-                      Alert.alert('Failed to send feedback', e.message);
+                      Alert.alert('Failed to send insight', e.message);
                       this.setState({ isWaiting: false });
                     }
                   });

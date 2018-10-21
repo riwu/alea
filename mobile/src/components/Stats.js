@@ -48,7 +48,7 @@ const Stats = props => (
         valueColor: '#DA291C',
       },
       {
-        title: 'Feedbacks Received',
+        title: 'Insights Received',
         value: Object.keys(props.feedback).length,
         up: true,
         backgroundColor: '#046A38',
