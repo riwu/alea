@@ -1,8 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = process.env.NODE_ENV === 'development'
-  ? 'http://localhost:3000/'
-  : `${process.env.REACT_APP_API_URL}/`;
+axios.defaults.baseURL = '/api/';
 
 const [get, post] = ['get', 'post'].map(method => (path, data) => axios({
   method,
